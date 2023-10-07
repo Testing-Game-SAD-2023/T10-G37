@@ -4,7 +4,7 @@ apt-get -y install software-properties-common
 apt-add-repository universe
 apt-get update
 apt-get -y install maven openjdk-8-jdk git unzip
-
+apt-get install wget
 sleep 3
 
 echo "le versioni di java e javac sono le seguenti, è necessaria la versione 1.8: "
