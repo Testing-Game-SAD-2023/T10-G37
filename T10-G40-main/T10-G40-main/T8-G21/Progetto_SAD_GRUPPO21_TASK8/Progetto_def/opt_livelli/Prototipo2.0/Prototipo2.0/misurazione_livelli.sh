@@ -59,11 +59,11 @@ echo "Il file $filename è stato creato con successo."
 	echo "coverage 8  finita" >> "$filename"
 	
 
-	mkdir -p ../../../data/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestReport #ADD
+	mkdir -p ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestReport #ADD
 
-	mv evosuite-report/statistics.csv ../../../data/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestReport
+	mv evosuite-report/statistics.csv ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestReport
 
-	mv I${var}/evosuite-tests/$NOME_PACKAGE ../../../data/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestSourceCode
+	mv I${var}/evosuite-tests/$NOME_PACKAGE ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestSourceCode
 
 
 done

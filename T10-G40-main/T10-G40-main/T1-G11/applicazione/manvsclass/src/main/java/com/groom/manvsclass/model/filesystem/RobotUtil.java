@@ -227,7 +227,7 @@ public class RobotUtil {
 
         File results2 [] = resultsDir2.listFiles();
         for(File result2 : results2) {
-			int score = LineCoverageCSV(result2.getAbsolutePath() + "/statistics.csv");
+			int score = LineCoverageCSV(result2.getAbsolutePath() + "/TestReport/statistics.csv");
 
 			System.out.println(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
 			int livello = Integer.parseInt(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
