@@ -63,7 +63,7 @@ public class RobotUtil {
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
 				// Verificare se la riga ha il formato desiderato
-				if (nextLine.length == 4 && nextLine[1].equals("LINE")) {
+				if (nextLine[1].equals("LINE")) {
 					// Estrai e converti il valore in double, moltiplica per 100 e converte in intero
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
 					return (int) coverageDouble;
@@ -227,12 +227,15 @@ public class RobotUtil {
 
         File results2 [] = resultsDir2.listFiles();
         for(File result2 : results2) {
+			System.out.println(result2.getAbsolutePath());
+			//File path = new File(result2.getAbsolutePath() + "/TestReport/statistics.csv");
+			//int score=LineCoverageCSV("path:"+ path.getAbsolutePath());
 			int score = LineCoverageCSV(result2.getAbsolutePath() + "/TestReport/statistics.csv");
 
 			System.out.println(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
 			int livello = Integer.parseInt(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
 
-			System.out.println("La copertura del livello " + String.valueOf(livello) + " è: " + String.valueOf(score));
+			System.out.println("La copertura del livello " + String.valueOf(livello) + " e': " + String.valueOf(score));
 
 			HttpClient httpClient = HttpClientBuilder.create().build();
 			HttpPost httpPost = new HttpPost("http://t4-g18-app-1:3000/robots");
