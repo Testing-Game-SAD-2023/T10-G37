@@ -87,6 +87,39 @@ public class GuiController {
 
         return result;
     }
+*/
+
+public List<String> getLevels(String className) {
+    List<String> result = new ArrayList<>();
+
+    for (int i = 1; i < 11; i++) {
+        try {
+            ResponseEntity<Object> randoopResponse = restTemplate.getForEntity(
+                "http://t4-g18-app-1:3000/robots?testClassId=" + className + "&type=randoop&difficulty=" + i,
+                Object.class
+            );
+            ResponseEntity<Object> evoSuiteResponse = restTemplate.getForEntity(
+                "http://t4-g18-app-1:3000/robots?testClassId=" + className + "&type=EvoSuite&difficulty=" + i,
+                Object.class
+            );
+
+            // Verifica la risposta e gestisci di conseguenza
+            if (randoopResponse.getStatusCode().is2xxSuccessful() || evoSuiteResponse.getStatusCode().is2xxSuccessful()) {
+                result.add(String.valueOf(i));
+            } else {
+                // Se una delle richieste fallisce, esci dal ciclo
+                break;
+            }
+        } catch (Exception e) {
+            // Gestisci le eccezioni in modo appropriato, ad esempio registrandole
+            e.printStackTrace();
+            break;
+        }
+    }
+
+    return result;
+}
+
 
     public List<ClassUT> getClasses() {
         ResponseEntity<List<ClassUT>> responseEntity = restTemplate.exchange("http://manvsclass-controller-1:8080/home",
