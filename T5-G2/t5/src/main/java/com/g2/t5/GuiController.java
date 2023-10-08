@@ -66,8 +66,8 @@ public class GuiController {
     // public String loginPage() {
     // return "login"; // Nome del template Thymeleaf per la pagina1.html
     // }
-
-    public List<String> getLevels(String className) {
+/* 
+      public List<String> getLevels(String className) {
         List<String> result = new ArrayList<String>();
 
         for(int i = 1; i < 11; i++) {
