@@ -76,6 +76,11 @@ public class GuiController {
             } catch (Exception e) {
                 break;
             }
+            try {
+                restTemplate.getForEntity("http://t4-g18-app-1:3000/robots?testClassId=" + className + "&type=EvoSuite&difficulty="+String.valueOf(i), Object.class);
+            } catch (Exception e) {
+                break;
+            }
 
             result.add(String.valueOf(i));
         }
