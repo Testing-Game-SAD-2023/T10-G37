@@ -68,6 +68,8 @@ echo "Il file $filename è stato creato con successo."
 
 	mv evosuite-report/statistics.csv ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestReport
 
+	mkdir -p ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestSourceCode #ADD
+
 	mv I${var}/evosuite-tests/$NOME_PACKAGE ../FolderTree/$NOME_CLASSE/RobotTest/EvoSuiteTest/0${cont}Level/TestSourceCode
 
 

@@ -64,6 +64,7 @@ public class RobotUtil {
 			while ((nextLine = reader.readNext()) != null) {
 				// Verificare se la riga ha il formato desiderato
 				if (nextLine[1].equals("LINE")) {
+
 					// Estrai e converti il valore in double, moltiplica per 100 e converte in intero
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
 					return (int) coverageDouble;
