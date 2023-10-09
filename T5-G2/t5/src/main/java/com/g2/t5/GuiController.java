@@ -79,7 +79,11 @@ public class GuiController {
             }
             result.add(String.valueOf(i));
         }
+        System.out.println("indice corrente : " + i );
+        
         for(int j=i; j < 11; j++) {
+                    System.out.println("indice corrente : " + j );
+
             try {
                 restTemplate.getForEntity("http://t4-g18-app-1:3000/robots?testClassId=" + className + "&type=EvoSuite&difficulty="+String.valueOf(j), Object.class);
             } catch (Exception e) {
