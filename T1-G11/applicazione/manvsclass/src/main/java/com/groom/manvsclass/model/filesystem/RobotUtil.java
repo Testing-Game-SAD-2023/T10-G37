@@ -170,6 +170,7 @@ public class RobotUtil {
 
 			HttpResponse response = httpClient.execute(httpPost);
 
+
 		}
 		
         // EVOSUITE - T8
@@ -198,9 +199,10 @@ public class RobotUtil {
         ProcessBuilder processBuilder2 = new ProcessBuilder();
 
 		//robot_generazione.sh VCardBean VCardBean "/mnt/c/Users/didom/Desktop/copianuovo/T10-G40-main/T8-G21/Progetto_SAD_GRUPPO21_TASK8/Progetto_def/opt_livelli/classe/VCardBean" 5
-
+		int l=resultsDir.listFiles().length;
+		String livelli=Integer.toString(l);
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////
-        processBuilder2.command("bash", "/VolumeT8/app/Prototipo2.0/robot_generazione.sh", cname, cname,  "/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode" ,"3");
+        processBuilder2.command("bash", "/VolumeT8/app/Prototipo2.0/robot_generazione.sh", cname, cname,  "/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode" , livelli);
         processBuilder2.directory(new File("/VolumeT8/app/"));
     
         Process process2 = processBuilder2.start();
@@ -245,7 +247,7 @@ public class RobotUtil {
 
 			JSONObject rob = new JSONObject();
 			rob.put("scores", String.valueOf(score));
-			rob.put("type", "EvoSuite");
+			rob.put("type", "evosuite");
 			rob.put("difficulty", String.valueOf(livello));
 			rob.put("testClassId", cname);
 

@@ -30,6 +30,8 @@ Per fare ciò bisogna fare le seguenti operazioni:
         db.interaction.createIndex({ name: "text" })
         db.Admin.createIndex({username: 1})
 
+
+4) in controller eseguire ./../VolumeT8/app/installazione.sh
 ## PASSO 3
 L'intera applicazione è adesso pienamente configurata e raggiungibile sulla porta :80.
 
