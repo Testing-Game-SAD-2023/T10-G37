@@ -77,6 +77,7 @@ public class GuiController {
                
                 break;
             }
+            
             result.add(String.valueOf(i));
         }
         System.out.println("indice corrente : " + i );
@@ -87,6 +88,9 @@ public class GuiController {
         }
         return result;
     }
+
+
+    
 
 
 
@@ -121,10 +125,12 @@ public class GuiController {
             String valore = classes.get(i).getName();
 
             List<String> levels = getLevels(valore);
-            System.out.println(levels);
-            hashMap.put(i, valore);
+            System.out.println("Lista"+levels);
+            hashMap.put(i, valore); // guardare t8.java per fixare i nomi
             robotList.put(i, levels);
+            System.out.println("robot:" + robotList);
         }
+
 
         model.addAttribute("hashMap", hashMap);
 

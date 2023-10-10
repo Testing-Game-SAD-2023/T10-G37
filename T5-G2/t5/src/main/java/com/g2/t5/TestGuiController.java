@@ -15,7 +15,7 @@ public class TestGuiController {
         List<String> levels = guiController.getLevels(className);
 
         // Stampa i livelli ottenuti dalla funzione getLevels
-        System.out.println("Livelli per la classe " + className + ":");
+        System.out.println("Livelli per la classe " + className + ":" + levels);
         for (String level : levels) {
             System.out.println(level);
         }
