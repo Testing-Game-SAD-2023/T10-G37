@@ -77,12 +77,13 @@ public class GuiController {
                
                 break;
             }
-            
-            result.add(String.valueOf(i));
+            String lvl= "Randoop lvl " + i;            
+            result.add(lvl);
         }
         System.out.println("indice corrente : " + i );
-        for(int j=(i+1);j<=(2*i);j++){
-            result.add(String.valueOf(j));
+        for(int j=(0);j<i;j++){
+            String lvlEvo= "Evosuite lvl " + j;          
+            result.add(lvlEvo);
              System.out.println("indice corrente : " + j );
 
         }
@@ -123,11 +124,10 @@ public class GuiController {
 
         for (int i = 0; i < classes.size(); i++) {
             String valore = classes.get(i).getName();
-
             List<String> levels = getLevels(valore);
             System.out.println("Lista"+levels);
             hashMap.put(i, valore); // guardare t8.java per fixare i nomi
-            robotList.put(i, levels);
+            robotList.put(i,levels);
             System.out.println("robot:" + robotList);
         }
 

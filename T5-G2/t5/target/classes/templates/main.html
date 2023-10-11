@@ -51,7 +51,7 @@
                                 <!-- Creo una lista composta di elementi lista-item che stampano 
                                 il valore degli elementi contenuti nella lista java "classi" -->
                                 <span th:each="entry: ${hashMap2}" th:id="${'levels-' + entry.key}" class="spa levels">
-                                    <button th:each="value: ${entry.value}" th:id="${entry.key + '-' + value}"  type="button" class ="lista-item my-button" th:text="${'randoop - LVL ' + value}" th:attr="onclick=|Handlebuttonrobot('${value}', this)|"></button>
+                                    <button th:each="value: ${entry.value}" th:id="${entry.key + '-' + value}"  type="button" class ="lista-item my-button" th:text="${value}" th:attr="onclick=|Handlebuttonrobot('${value}', this)|"></button>
                                 </span> 
                             </div>
                     </div>

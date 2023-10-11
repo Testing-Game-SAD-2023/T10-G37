@@ -6,6 +6,7 @@ com\g2\t5\GuiController$1.class
 com\g2\t5\GuiController.class
 com\g2\t5\FileController.class
 com\g2\t5\GameDataWriter.class
+com\g2\t5\TestGuiController.class
 com\g2\t5\T5Application.class
 com\g2\Interfaces\t2_3.class
 com\g2\Interfaces\t8Interface.class
