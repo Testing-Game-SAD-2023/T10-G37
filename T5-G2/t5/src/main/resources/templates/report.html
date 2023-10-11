@@ -46,13 +46,14 @@
   </div>
   <script>
     var nameCUT= localStorage.getItem("classe");
-    var robotScelto = localStorage.getItem("robot");
+   // var robotScelto = localStorage.getItem("robot");
     var difficulty = localStorage.getItem("difficulty");
+    var split=difficulty.split(" ");
 
-    if(nameCUT == null || robotScelto == null || difficulty == null) window.location.href = "/main";
+    if( difficulty == null) window.location.href = "/main";
 
     document.getElementById("class").innerText = nameCUT;
-    document.getElementById("robot").innerText = robotScelto + " - LVL " + difficulty;
+    document.getElementById("robot").innerText = split[0] + " " + split[1] + " "+  split[2];
   // Recupera le variabili dalla memoria locale
   // var username = localStorage.getItem("username");
 

@@ -81,7 +81,7 @@ public class GuiController {
             result.add(lvl);
         }
         System.out.println("indice corrente : " + i );
-        for(int j=(0);j<i;j++){
+        for(int j=(1);j<i;j++){
             String lvlEvo= "Evosuite lvl " + j;          
             result.add(lvlEvo);
              System.out.println("indice corrente : " + j );

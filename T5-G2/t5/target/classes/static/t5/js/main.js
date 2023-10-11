@@ -56,7 +56,7 @@ function Handlebuttonclass(id, button) {
 
 function Handlebuttonrobot(id, button) {
   $(document).ready(function () {
-    robot = "randoop";
+    robot = "";
     difficulty = id;
     console.log('Hai cliccato sul bottone del robot con id: ' + robot);
 
