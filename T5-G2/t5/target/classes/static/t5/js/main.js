@@ -56,8 +56,10 @@ function Handlebuttonclass(id, button) {
 
 function Handlebuttonrobot(id, button) {
   $(document).ready(function () {
-    robot = "";
-    difficulty = id;
+    console.log('contenuto id' + id);
+    var split=id.split(" ");
+    robot = split[0];
+    difficulty = split[2];
     console.log('Hai cliccato sul bottone del robot con id: ' + robot);
 
     // Se il bottone precedentemente selezionato è diverso da null

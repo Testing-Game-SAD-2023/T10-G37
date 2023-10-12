@@ -48,12 +48,14 @@
     var nameCUT= localStorage.getItem("classe");
    // var robotScelto = localStorage.getItem("robot");
     var difficulty = localStorage.getItem("difficulty");
-    var split=difficulty.split(" ");
+    var robot = localStorage.getItem("robot");
+
+    //var split=difficulty.split(" ");
 
     if( difficulty == null) window.location.href = "/main";
 
     document.getElementById("class").innerText = nameCUT;
-    document.getElementById("robot").innerText = split[0] + " " + split[1] + " "+  split[2];
+    document.getElementById("robot").innerText = robot + " " + "LVL"+ " "+  difficulty;
   // Recupera le variabili dalla memoria locale
   // var username = localStorage.getItem("username");
 
