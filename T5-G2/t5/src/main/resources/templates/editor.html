@@ -658,8 +658,7 @@ public class NomeClasseTest {
             alert("Hai già sottomesso il tuo tentativo!");
           } else {
             var formData = new FormData();
-            var difficulty = localStorage.getItem("difficulty");
-            var split=difficulty.split(" ");
+            
             formData.append("testingClassName", "NomeClasseTest.java");
             formData.append("testingClassCode", editor.getValue());
             formData.append("underTestClassName", localStorage.getItem("classe")+".java");
@@ -669,8 +668,8 @@ public class NomeClasseTest {
             formData.append("roundId",localStorage.getItem("roundId"));
             formData.append("gameId",localStorage.getItem("gameId"));
             formData.append("testClassId", localStorage.getItem("classe"));
-            formData.append("difficulty", split[2]);
-            formData.append("type", split[0]);
+            formData.append("difficulty", localStorage.getItem("difficulty"));
+            formData.append("type", localStorage.getItem("robot"));
             $.ajax({
               url: "http://localhost/api/run", // con questa verso il task 6, si salva e conclude la partita e si decreta il vincitore
               type: "POST",

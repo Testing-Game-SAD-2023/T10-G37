@@ -77,12 +77,12 @@ public class GuiController {
                
                 break;
             }
-            String lvl= "Randoop lvl " + i;            
+            String lvl= "randoop lvl " + i;            
             result.add(lvl);
         }
         System.out.println("indice corrente : " + i );
         for(int j=(1);j<i;j++){
-            String lvlEvo= "Evosuite lvl " + j;          
+            String lvlEvo= "evosuite lvl " + j;          
             result.add(lvlEvo);
              System.out.println("indice corrente : " + j );
 
