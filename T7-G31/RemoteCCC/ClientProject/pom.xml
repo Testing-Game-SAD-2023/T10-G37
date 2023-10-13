@@ -19,6 +19,14 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.evosuite</groupId>
+            <artifactId>evosuite</artifactId>
+            <version>1.0.6</version>
+            <type>pom</type>
+        </dependency>
+
         <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
