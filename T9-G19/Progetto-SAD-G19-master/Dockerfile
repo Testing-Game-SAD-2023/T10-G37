@@ -8,7 +8,6 @@ RUN apk add --no-cache openssl ncurses-libs libstdc++
 
 
 COPY . /app
-ls
 WORKDIR /app
 
 ENTRYPOINT [ "bash", "./docker-entrypoint.sh" ]
