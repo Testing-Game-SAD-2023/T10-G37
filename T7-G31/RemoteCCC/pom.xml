@@ -18,12 +18,6 @@
 	</properties>
 	<dependencies>
 
-		<dependency>
-			<groupId>org.evosuite</groupId>
-			<artifactId>evosuite</artifactId>
-			<version>1.0.6</version>
-			<type>pom</type>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
