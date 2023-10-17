@@ -1,13 +1,55 @@
 installare junit5
 apt install junit5
+wget https://repo1.maven.org/maven2/junit/junit/4.13.1/junit-4.13.1.jar
+
+Controllare la versione di javac
+update-alternatives --config javac
 compilare i file .java
-javac -d ./target/classes src/main/java/ClientProject/*.java
-javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar -d ./target/classes src/test/java/ClientProject/*.java
+javac -d ./target/classes/*.java
+javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar -d ./target/classes src/test/java/ClientProject/NomeClasseTest.java
+
+javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar -d ./target/classes src/main/java/ClientProject/Calcolatrice.java src/test/java/ClientProject/NomeClasseTest.java
+
 
 Eseguire i la misurazione
 
 
 java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject.Calcolatrice -Djunit=ClientProject.NomeClasseTest -projectCP $PWD/target/classes/ClientProject -Dcriterion=LINE
 java -jar evosuite-1.0.6.jar -measureCoverage -class Calcolatrice -Djunit=NomeClasseTest -projectCP /target/classes -Dcriterion=LINE
-java -jar evosuite-1.0.6.jar -measureCoverage -class  ClientProject.Calcolatrice -Djunit=ClientProject.NomeClasseTest -projectCP /ClientProject/target/classes -Dcriterion=LINE
+java -jar evosuite-1.0.6.jar -measureCoverage -class  ClientProject.Calcolatrice -Djunit=ClientProject.NomeClasseTest -projectCP /ClientProject/target/classes -Dcriterion=LINE ***
+java -jar evosuite-1.0.6.jar -measureCoverage -class Calcolatrice -Djunit=NomeClasseTest -projectCP $PWD/target/classes/ClientProject -Dcriterion=LINE
+java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject.Calcolatrice -projectCP /ClientProject/target/classes -Dcriterion=LINE
+java -jar evosuite-1.0.6.jar -measureCoverage -class Calcolatrice -projectCP /ClientProject/target/classes/ClientProject -Dcriterion=LINE
+
+java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject.Calcolatrice -projectCP /ClientProject/target/classes:/ClientProject/target/classes/ClientProject -Dcriterion=LINE
+
+javac -cp ../usr//share/java/junit4.jar -d ./target/classes src/test/java/ClientProject/*.java
+
+javac -d ./target/classes src/test/java/ClientProject/*.java
+
+
+javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar ./TestCalcolatrice.java
+
+
+export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:I${var}/evosuite-tests:target/dependency/junit-4.13.1.jar:target/dependency/hamcrest-core-1.3.jar
+
+export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:src/main/javjaa/ClientProject:src/test/java/ClientProject:junit-4.13.1.jar:hamcrest-core-1.3.jar
+
+cp junit-4.13.1.jar /ClientProject
+javac -cp ./junit-4.13.1.jar -d ./target/classes src/test/java/ClientProject/*.java
+
+javac -cp /usr//share/java/junit-jupiter-api-5.3.2.jar -d /ClientProject/target/classes ClientProject/src/main/java/ClientProject/NomeClasseTest.java
+
+
+
+
+
+
+
+
+
+
+
+
+
 
