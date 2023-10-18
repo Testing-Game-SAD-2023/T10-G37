@@ -20,9 +20,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.File;
-
+import java.io.FileReader;
 import java.io.FileWriter;
-
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
 
 
@@ -35,6 +36,34 @@ public class App {
     public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
+
+    	public static String LineCoverageCSV(String path) {
+		try {
+			// Creare un oggetto CSVReader
+			CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withSkipLines(1).build();
+	
+			// Leggere le righe del file CSV
+			String[] nextLine;
+			while ((nextLine = reader.readNext()) != null) {
+				// Verificare se la riga ha il formato desiderato
+				if (nextLine[1].equals("LINE")) {
+
+					// Estrai e converti il valore in double, moltiplica per 100 e converte in intero
+					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
+					return   Double.toString(coverageDouble);
+				}
+			}
+	
+			// Chiudere il reader
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	
+		// Restituire un valore predefinito se il valore non è stato trovato
+		return "Errore csvCoverage"; // Cambia il valore predefinito a seconda delle tue esigenze
+	}
+    
 
 
        /**
@@ -72,10 +101,11 @@ public class App {
 
         
         if(compileExecuteCovarageWithMaven(output_maven,request)){
-            String retXmlJacoco = readFileToString(Config.getCoverageFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
+            String retCsv = readFileToString(Config.getCoverageFolder());
+            String coverage=LineCoverageCSV(retCsv);
             response.setError(false);
             response.setoutCompile(output_maven[0]);
-            response.setCoverage(retXmlJacoco);
+            response.setCoverage(coverage);
 
         }else
         {
@@ -83,7 +113,7 @@ public class App {
             response.setoutCompile(output_maven[0]);
             response.setCoverage(null);            
         }
-        deleteFile(underTestClassName, testingClassName);
+        //deleteFile(underTestClassName, testingClassName);
         return response;
     }
 
@@ -165,8 +195,9 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
     
         String nome_test=request.getTestingClassName();
         String nome_classe=request.getUnderTestClassName();
+        String nome_t = nome_test.replace(".java", "");
+        String nome_c = nome_classe.replace(".java", "");
         System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
-
         /* ProcessBuilder inizia = new ProcessBuilder();
         inizia.command("mvn clean compile");
         inizia.directory(new File(Config.getpathCompiler()));
@@ -179,7 +210,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
     
         Process process = processBuilder.start();*/
         
-        ProcessBuilder processBuilder = new ProcessBuilder("sh", "codice.sh", nome_classe, nome_test);
+        ProcessBuilder processBuilder = new ProcessBuilder("sh", "codice.sh", nome_c, nome_t);
         processBuilder.directory(new File(Config.getpathCompiler())); // Imposta la directory di lavoro corretta
         
         // Reindirizza l'output di errore standard (stderr) del processo
@@ -224,9 +255,13 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         System.out.println("codice " + code);
         System.out.println("Path " + path );
         File tempFile = new File(path + nameclass);
-        tempFile.deleteOnExit();
+        //tempFile.deleteOnExit();
         try (FileWriter writer = new FileWriter(tempFile)) {
             writer.write(code);
+            System.out.println("File creato correttamente ");
+        }
+        catch (IOException e) {
+            System.err.println("Errore durante il salvataggio del file: " + e.getMessage());
         }
         
         return tempFile.toPath();

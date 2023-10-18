@@ -201,7 +201,8 @@ public class MyController {
             String xml_string = responseObj.getString("coverage");
             String outCompile = responseObj.getString("outCompile");
             // PRESA DELLO SCORE UTENTE
-            int userScore = ParseUtil.LineCoverage(xml_string);
+           // int userScore = ParseUtil.LineCoverage(xml_string);
+           int userScore= Integer.parseInt(xml_string);
 
             // RISULTATI ROBOT VERSO TASK4
             URIBuilder builder = new URIBuilder("http://t4-g18-app-1:3000/robots");
