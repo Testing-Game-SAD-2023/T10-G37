@@ -47,7 +47,7 @@ javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar:./target/classes/Client
 javac -cp ../usr//share/java/junit-jupiter-api-5.3.2.jar:ClientProject/target/classes -d ./target/classes src/test/java/ClientProject/NomeClasseTest.java
 
 
-java -jar evosuite-1.0.6.jar -measureCoverage -class  ClientProject.Calcolatrice -Djunit=ClientProject.NomeClasseTest -projectCP /ClientProject/target/classes:/ClientProject/target/test-classes -Dcriterion=LINE
+java -jar evosuite-1.0.6.jar -measureCoverage -class  ClientProject.Calcolatrice -Djunit=ClientProject.NomeClasseTest -projectCP /ClientProject/target/classes:/ClientProject/target/test-classes -Dcriterion=LINE ******
 
 java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject.Calcolatrice -Djunit ClientProject.NomeClasseTest -projectCP /ClientProject/target/test-classes/ClientProject:/ClientProject/target/classes/ClientProject
 

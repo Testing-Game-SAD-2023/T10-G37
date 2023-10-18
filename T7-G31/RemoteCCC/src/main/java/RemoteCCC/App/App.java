@@ -171,8 +171,9 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         
         String nome_classe=request.getUnderTestClassName();
         System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
+        String command = "java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject." + nome_classe + " Djunit=ClientProject." + nome_test + " -projectCP /ClientProject/target/classes:/ClientProject/target/test-classes -Dcriterion=LINE";
 
-        processBuilder.command("java -jar evosuite-1.0.6.jar ","-measureCoverage ", "-class ", "ClientProject.", nome_classe ," Djunit=ClientProject.",  nome_test, "-projectCP ","/ClientProject/target/classes:/ClientProject/target/test-classes " , "-Dcriterion=LINE");
+        processBuilder.command("sh", "-c", command);
         processBuilder.directory(new File(Config.getpathCompiler()));
     
         Process process = processBuilder.start();
