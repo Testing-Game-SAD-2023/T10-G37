@@ -56,6 +56,7 @@ public class App {
         
         // Salvataggio dei due file su disco: occorre specificare il nome della classe, per la corretta compilazione
         saveCodeToFile(testingClassName, testingClassCode, Config.getTestingClassPath());
+        System.out.println("Codice correttamente salvato " + Config.getUnderTestClassPath());
         saveCodeToFile(underTestClassName, underTestClassCode, Config.getUnderTestClassPath());
 
         
@@ -162,34 +163,40 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
 
         
     
-        ProcessBuilder processBuilder = new ProcessBuilder();
         String nome_test=request.getTestingClassName();
-        ProcessBuilder inizia = new ProcessBuilder();
+        String nome_classe=request.getUnderTestClassName();
+        System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
+
+        /* ProcessBuilder inizia = new ProcessBuilder();
         inizia.command("mvn clean compile");
         inizia.directory(new File(Config.getpathCompiler()));
         inizia.start();
         
-        String nome_classe=request.getUnderTestClassName();
-        System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
         String command = "java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject." + nome_classe + " Djunit=ClientProject." + nome_test + " -projectCP /ClientProject/target/classes:/ClientProject/target/test-classes -Dcriterion=LINE";
 
         processBuilder.command("sh", "-c", command);
         processBuilder.directory(new File(Config.getpathCompiler()));
     
+        Process process = processBuilder.start();*/
+        
+        ProcessBuilder processBuilder = new ProcessBuilder("sh", "codice.sh", nome_classe, nome_test);
+        processBuilder.directory(new File(Config.getpathCompiler())); // Imposta la directory di lavoro corretta
+        
+        // Reindirizza l'output di errore standard (stderr) del processo
+        processBuilder.redirectErrorStream(true);
+        
         Process process = processBuilder.start();
-        System.out.println("Ciao");
-
+        
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
-        while ((line = reader.readLine()) != null)
+        while ((line = reader.readLine()) != null) {
             ret[0] += line += "\n";
+            // Stampa l'output in modo da poter vedere l'errore
+            System.err.println(line);
+        }
+        
         int exitCode = process.waitFor();
-       
-        // Legge il contenuto del buffer del terminale
-        // InputStream inputStream = process.getInputStream();
-        // byte[] buffer = new byte[inputStream.available()];
-        // inputStream.read(buffer);
-        // ret[0] = new String(buffer, StandardCharsets.UTF_8);
+        
         if (exitCode == 0) {
             System.out.println("Maven clean compile executed successfully.");
             return true;
@@ -197,6 +204,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
             System.out.println("Error executing Maven clean compile.");
             return false;
         }
+        
 
     }
 
@@ -213,6 +221,8 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
     private Path saveCodeToFile(String nameclass, String code, String path) throws IOException {
         String packageDeclaration = Config.getpackageDeclaretion();
         code = packageDeclaration + code;
+        System.out.println("codice " + code);
+        System.out.println("Path " + path );
         File tempFile = new File(path + nameclass);
         tempFile.deleteOnExit();
         try (FileWriter writer = new FileWriter(tempFile)) {
