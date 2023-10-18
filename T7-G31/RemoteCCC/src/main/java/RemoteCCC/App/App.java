@@ -160,13 +160,19 @@ public class App {
     }*/
 private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO request) throws IOException, InterruptedException {
 
+        
+    
         ProcessBuilder processBuilder = new ProcessBuilder();
         String nome_test=request.getTestingClassName();
+        ProcessBuilder inizia = new ProcessBuilder();
+        inizia.command("mvn clean compile");
+        inizia.directory(new File(Config.getpathCompiler()));
+        inizia.start();
         
         String nome_classe=request.getUnderTestClassName();
         System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
 
-        processBuilder.command("java -jar evosuite-1.0.6.jar ","-measureCoverage ", "-class ", nome_classe ," Djunit=", nome_test," -Dcriterion=LINE");
+        processBuilder.command("java -jar evosuite-1.0.6.jar ","-measureCoverage ", "-class ", "ClientProject.", nome_classe ," Djunit=ClientProject.",  nome_test, "-projectCP ","/ClientProject/target/classes:/ClientProject/target/test-classes " , "-Dcriterion=LINE");
         processBuilder.directory(new File(Config.getpathCompiler()));
     
         Process process = processBuilder.start();
