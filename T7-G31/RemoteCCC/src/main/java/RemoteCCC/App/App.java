@@ -50,7 +50,9 @@ public class App {
 
 					// Estrai e converti il valore in double, moltiplica per 100 e converte in intero
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
-					return   Double.toString(coverageDouble);
+                    int coverage= (int) coverageDouble;
+                    String cov= String.valueOf(coverage);
+					return  cov;
 				}
 			}
 	
@@ -101,8 +103,9 @@ public class App {
 
         
         if(compileExecuteCovarageWithMaven(output_maven,request)){
-            String retCsv = readFileToString(Config.getCoverageFolder());
-            String coverage=LineCoverageCSV(retCsv);
+            //String retCsv = readFileToString(Config.getCoverageFolder());
+            String coverage=LineCoverageCSV(Config.getCoverageFolder());
+
             response.setError(false);
             response.setoutCompile(output_maven[0]);
             response.setCoverage(coverage);
@@ -113,7 +116,7 @@ public class App {
             response.setoutCompile(output_maven[0]);
             response.setCoverage(null);            
         }
-        //deleteFile(underTestClassName, testingClassName);
+        deleteFile(underTestClassName, testingClassName);
         return response;
     }
 
@@ -255,7 +258,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         System.out.println("codice " + code);
         System.out.println("Path " + path );
         File tempFile = new File(path + nameclass);
-        //tempFile.deleteOnExit();
+        tempFile.deleteOnExit();
         try (FileWriter writer = new FileWriter(tempFile)) {
             writer.write(code);
             System.out.println("File creato correttamente ");

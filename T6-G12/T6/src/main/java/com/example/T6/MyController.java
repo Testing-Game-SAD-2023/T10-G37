@@ -199,10 +199,11 @@ public class MyController {
             JSONObject responseObj = new JSONObject(responseBody);
 
             String xml_string = responseObj.getString("coverage");
+            System.out.println("Score Utente : "+ xml_string);
             String outCompile = responseObj.getString("outCompile");
             // PRESA DELLO SCORE UTENTE
            // int userScore = ParseUtil.LineCoverage(xml_string);
-           int userScore= Integer.parseInt(xml_string);
+           Integer userScore= Integer.parseInt(xml_string);
 
             // RISULTATI ROBOT VERSO TASK4
             URIBuilder builder = new URIBuilder("http://t4-g18-app-1:3000/robots");
@@ -227,6 +228,8 @@ public class MyController {
 
             String score = responseObj.getString("scores");
             Integer roboScore = Integer.parseInt(score);
+             System.out.println("Score Robot : "+ roboScore);
+
 
             // conclusione e salvataggio partita
             // chiusura turno con vincitore
@@ -237,7 +240,10 @@ public class MyController {
 
             if (roboScore > userScore) {
                 obj.put("isWinner", false);
+                System.out.println("Robot Vince");
+
             } else {
+                System.out.println("Utente Vince");
                 obj.put("isWinner", true);
             }
             String time = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT);

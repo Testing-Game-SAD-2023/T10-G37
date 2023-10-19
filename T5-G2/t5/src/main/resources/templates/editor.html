@@ -681,7 +681,8 @@ public class NomeClasseTest {
                 console.log(response);
 
                 consoleArea.setValue(response.outCompile);
-                highlightCodeCoverage($.parseXML(response.coverage));
+                
+               //add highlightCodeCoverage($.parseXML(response.coverage));
                 consoleArea2.setValue(`Esito Risultati (percentuale di linee coperte)
   Il tuo punteggio: ${response.score.toString()}% LOC
   Il punteggio del robot: ${response.robotScore.toString()}% LOC`);
