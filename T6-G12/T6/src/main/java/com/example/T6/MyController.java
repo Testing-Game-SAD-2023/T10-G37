@@ -373,9 +373,11 @@ public class MyController {
             JSONObject responseObj = new JSONObject(responseBody);
 
             String xml_string = responseObj.getString("coverage");
+            System.out.println("Score Utente : "+ xml_string);
+
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.TEXT_XML);
+            headers.setContentType(MediaType.TEXT_PLAIN);
             // headers.setContentDisposition(ContentDisposition.attachment().filename("index.html").build());
 
             return new ResponseEntity<>(xml_string, headers, HttpStatus.OK);

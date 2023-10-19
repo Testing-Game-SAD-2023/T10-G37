@@ -104,7 +104,15 @@ public class App {
         
         if(compileExecuteCovarageWithMaven(output_maven,request)){
             //String retCsv = readFileToString(Config.getCoverageFolder());
+            Path path = Paths.get(Config.getCoverageFolder());
             String coverage=LineCoverageCSV(Config.getCoverageFolder());
+            try {
+                Files.delete(path);
+                System.out.println("Il file è stato eliminato con successo.");
+            } catch (IOException e) {
+                System.err.println("Impossibile eliminare il file: " + e.getMessage());
+            }
+
 
             response.setError(false);
             response.setoutCompile(output_maven[0]);
