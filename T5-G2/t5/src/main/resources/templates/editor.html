@@ -228,8 +228,8 @@
         text-align: center;
       }
       .modal2-content {
-        width: 20%;
-        height: 35%;
+        width: 15%;
+        height: 22%;
         top:22.5%;
         transform: translateY(-50%);
         display: inline-block;
@@ -365,8 +365,8 @@
           </div>
 
           <button id="compileButton" class="compile-button" title="Compile"></button>
-          <button id="runButton" class="run-button" title="Run"></button>
-          <button id="coverageButton" class="coverage-button" title="Run with JaCoCo"></button>
+          <button id="runButton" class="run-button" title="Start Game"></button>
+          <button id="coverageButton" class="coverage-button" title="Run UserTest"></button>
         </div>
         <textarea id="editor" name="editor">
           import org.junit.Before;
@@ -1064,7 +1064,7 @@
       titleElement.textContent = "GAME INFO";
       modal2Content.insertBefore(titleElement, modal2Content.firstChild);
       // Aggiungi i campi
-      var idUtenteElement = document.createElement("p");
+      /* var idUtenteElement = document.createElement("p");
       var usernamej = parseJwt(getCookie("jwt")).userId;
       idUtenteElement.textContent = "UserID: "+usernamej;
       modal2Content.appendChild(idUtenteElement);
@@ -1086,7 +1086,7 @@
 
       // var difficoltaElement = document.createElement("p");
       // difficoltaElement.textContent = "Livello: 1";
-      // modal2Content.appendChild(difficoltaElement);
+      // modal2Content.appendChild(difficoltaElement);*/
     </script>
 
     <script th:inline="javascript">

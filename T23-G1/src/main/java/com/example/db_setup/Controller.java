@@ -146,6 +146,9 @@ public class Controller {
         try {
             emailService.sendMailRegister(email, ID);
             return ResponseEntity.ok("Registration completed successfully!");
+           //return ResponseEntity.ok("Registration completed successfully!<script>redirectToLogin();</script>");
+
+            
         } catch (MessagingException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to confirm your registration");
         }
