@@ -25,6 +25,13 @@ REM Ciclo attraverso le directory specificate
    
    popd 
 ))
+REM Esecuzione del file entrypoint.sh all'interno del container remoteccc-app-1
+echo "Esecuzione del file entrypoint.sh all'interno del container remoteccc-app-1"
+docker exec -it remoteccc-app-1 /bin/bash -c "./entrypoint.sh"
+
+REM Esecuzione del file installazione.sh all'interno del container manvsclass-controller-1
+echo "Esecuzione del file installazione.sh all'interno del container manvsclass-controller-1"
+docker exec -it manvsclass-controller-1 /bin/bash -c "./../VolumeT8/app/installazione.sh"
 
 REM Messaggio di completamento dell'installazione
 echo "Installazione terminata"
