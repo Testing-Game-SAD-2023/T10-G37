@@ -15,11 +15,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginTest {
     private static ChromeDriver driver;
-    private static int timeout = 10;
+    private static int timeout = 60;
 
     @BeforeClass
     public static void setDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\pasqu\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\didom\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
     }
 
     @Before

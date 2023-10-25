@@ -18,30 +18,35 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.openqa.selenium.Alert;
+
 public class EditorTest {
     private static ChromeDriver driver;
     private static int timeout = 60;
 
     @BeforeClass
     public static void setDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\pasqu\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",
+                "C:\\Users\\didom\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
     }
 
     @Before
-    public void openBrowser(){
+    public void openBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
-        chromePrefs.put("download.default_directory", "C:\\Users\\pasqu\\AppData\\Local\\Temp");
+        chromePrefs.put("download.default_directory", "C:\\Users\\didom\\Downloads");
         options.setExperimentalOption("prefs", chromePrefs);
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 
-        driver.get("http://localhost/login");	
+        driver.get("http://localhost/login");
         driver.findElement(By.id("email")).sendKeys("pippobaudo@gmail.com");
         driver.findElement(By.id("password")).sendKeys("Pippino0");
+
+        // Ora esegui l'istruzione desiderata
         driver.findElement(By.cssSelector("input[type=submit]")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -49,39 +54,40 @@ public class EditorTest {
         String urlPaginaDiRedirezione = "http://localhost/main";
         try {
             wait.until(ExpectedConditions.urlToBe(urlPaginaDiRedirezione));
-        } catch(TimeoutException e) {
+        } catch (TimeoutException e) {
             Assert.fail();
         }
-    } 
+    }
 
     @After
-    public void closeBrowser(){
+    public void closeBrowser() {
         driver.close();
-    } 
+    }
 
     @Test
     public void download() throws InterruptedException {
         driver.findElement(By.id("0")).click();
-
+        Thread.sleep(1000);
         driver.findElement(By.id("downloadButton")).click();
 
-        File f = new File("C:\\Users\\pasqu\\AppData\\Local\\Temp\\class.java"); 
-        
+        File f = new File("C:\\Users\\didom\\Downloads\\class.java");
+
         Thread.sleep(5000);
-        
+
         Assert.assertTrue(f.exists());
-    } 
+    }
 
     public void moveToReport(String urlPaginaDiRedirezione) {
         driver.findElement(By.id("0")).click();
-        driver.findElement(By.id("0-1")).click();
+        // driver.findElement(By.id("0-1")).click();
+        driver.findElement(By.xpath("//*[@id='0-randoop lvl 1']")).click();
         driver.findElementsByCssSelector(".div_buttons_main > * button").get(1).click();
 
         WebDriverWait wait = new WebDriverWait(driver, timeout);
 
         try {
             wait.until(ExpectedConditions.urlToBe(urlPaginaDiRedirezione));
-        } catch(TimeoutException e) {
+        } catch (TimeoutException e) {
             Assert.fail();
         }
     }
@@ -92,7 +98,8 @@ public class EditorTest {
 
         moveToReport(urlPaginaDiRedirezione);
 
-        Assert.assertEquals("Test fallito! La selezione non è avvenuta correttamente.", driver.getCurrentUrl(), urlPaginaDiRedirezione);
+        Assert.assertEquals("Test fallito! La selezione non è avvenuta correttamente.", driver.getCurrentUrl(),
+                urlPaginaDiRedirezione);
     }
 
     public void moveToEditor(String urlPaginaDiRedirezione) {
@@ -104,7 +111,7 @@ public class EditorTest {
 
         try {
             wait.until(ExpectedConditions.urlToBe(urlPaginaDiRedirezione));
-        } catch(TimeoutException e) {
+        } catch (TimeoutException e) {
             Assert.fail();
         }
     }
@@ -114,8 +121,9 @@ public class EditorTest {
         String urlPaginaDiRedirezione = "http://localhost/editor";
         moveToEditor(urlPaginaDiRedirezione);
 
-        Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", driver.getCurrentUrl(), urlPaginaDiRedirezione);
-    } 
+        Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", driver.getCurrentUrl(),
+                urlPaginaDiRedirezione);
+    }
 
     @Test
     public void compile() {
@@ -125,19 +133,21 @@ public class EditorTest {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
 
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
-        } catch(TimeoutException e) {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
             Assert.fail();
         }
 
         driver.findElement(By.id("compileButton")).click();
 
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#console-textarea + div > * div.CodeMirror-code > *"), 1));
-        } catch(TimeoutException e) {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#console-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
             Assert.fail();
         }
-    } 
+    }
 
     @Test
     public void coverage() {
@@ -147,19 +157,61 @@ public class EditorTest {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
 
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
-        } catch(TimeoutException e) {
-            Assert.fail();
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
+            Assert.fail("Element not found within the specified timeout.");
         }
 
         driver.findElement(By.id("coverageButton")).click();
 
-        try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > * .uncovered-line"), 0));
-        } catch(TimeoutException e) {
-            Assert.fail();
+        // Aspetta che un alert sia presente
+        wait.until(ExpectedConditions.alertIsPresent());
+
+        // Ottieni l'alert
+        Alert alert = driver.switchTo().alert();
+
+        // Ottieni il testo dall'alert
+        String alertText = alert.getText();
+        System.out.println(alertText);    
+        // Chiudi l'alert
+        alert.accept();
+
+        // Ora puoi verificare il testo dell'alert e assegnare l'esito del test
+        if (alertText.equals("Risultato coperture Test utente : 0 %")) {
+            // La condizione desiderata è verificata, quindi il test ha esito positivo
+            System.out.println("Esito positivo: Copertura test utente è al 0%.");
+        } else {
+            Assert.fail("Esito negativo: Copertura test utente non è al 0%.");
         }
-    } 
+    }
+
+    /*
+     * @Test
+     * public void coverage() {
+     * String urlPaginaDiRedirezione = "http://localhost/editor";
+     * moveToEditor(urlPaginaDiRedirezione);
+     * 
+     * WebDriverWait wait = new WebDriverWait(driver, timeout);
+     * 
+     * try {
+     * wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
+     * cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+     * } catch(TimeoutException e) {
+     * Assert.fail();
+     * }
+     * 
+     * driver.findElement(By.id("coverageButton")).click();
+     * 
+     * try {
+     * wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
+     * cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > * .uncovered-line"
+     * ), 0));
+     * } catch(TimeoutException e) {
+     * Assert.fail();
+     * }
+     * }
+     */
 
     @Test
     public void run() {
@@ -169,17 +221,19 @@ public class EditorTest {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
 
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
-        } catch(TimeoutException e) {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
             Assert.fail();
         }
 
         driver.findElement(By.id("runButton")).click();
 
         try {
-            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#console-textarea2 + div > * div.CodeMirror-code > *"), 1));
-        } catch(TimeoutException e) {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#console-textarea2 + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
             Assert.fail();
         }
-    } 
+    }
 }
