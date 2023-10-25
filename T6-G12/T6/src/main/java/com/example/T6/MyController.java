@@ -345,7 +345,7 @@ public class MyController {
     //     }
     // }
 
-    @PostMapping("/getJaCoCoReport")
+    @PostMapping("/getReport")
     public ResponseEntity<String> getJaCoCoReport(HttpServletRequest request) {
         try {
             HttpPost httpPost = new HttpPost("http://remoteccc-app-1:1234/compile-and-codecoverage");
