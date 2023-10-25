@@ -16,8 +16,8 @@ zuul:
   routes:
     jacoco-service:
       sensitiveHeaders:
-      path: /api/getJaCoCoReport/**
-      url: http://t6-g12-app-1:80/getJaCoCoReport
+      path: /api/getReport/**
+      url: http://t6-g12-app-1:80/getReport
     receiveClass-service:
       sensitiveHeaders:
       path: /api/receiveClassUnderTest/**
