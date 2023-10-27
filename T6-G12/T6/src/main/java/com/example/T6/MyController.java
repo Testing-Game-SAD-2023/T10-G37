@@ -275,9 +275,49 @@ public class MyController {
         }
     }
 
+    @PostMapping("/getJaCoCoReport")
+    public ResponseEntity<String> getJaCoCoReport(HttpServletRequest request) {
+        try {
+            HttpPost httpPost = new HttpPost("http://remoteccc-app-1:1234/highlightline");
+
+            JSONObject obj = new JSONObject();
+
+            obj.put("testingClassName", request.getParameter("testingClassName"));
+            obj.put("testingClassCode", request.getParameter("testingClassCode"));
+            obj.put("underTestClassName", request.getParameter("underTestClassName"));
+            obj.put("underTestClassCode", request.getParameter("underTestClassCode"));
+
+            StringEntity jsonEntity = new StringEntity(obj.toString(), ContentType.APPLICATION_JSON);
+
+            httpPost.setEntity(jsonEntity);
+
+            HttpResponse response = httpClient.execute(httpPost);
+
+            if (response.getStatusLine().getStatusCode() > 299) {
+                System.err.println("Erorre compilazione");
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            HttpEntity entity = response.getEntity();
+            String responseBody = EntityUtils.toString(entity);
+            JSONObject responseObj = new JSONObject(responseBody);
+
+            String xml_string = responseObj.getString("coverage");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_XML);
+            // headers.setContentDisposition(ContentDisposition.attachment().filename("index.html").build());
+
+            return new ResponseEntity<>(xml_string, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            System.err.println(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @PostMapping("/getReport")
-    public ResponseEntity<String> getJaCoCoReport(HttpServletRequest request) {
+    public ResponseEntity<String> getReport(HttpServletRequest request) {
         try {
             HttpPost httpPost = new HttpPost("http://remoteccc-app-1:1234/compile-and-codecoverage");
 

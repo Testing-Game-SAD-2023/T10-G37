@@ -153,6 +153,11 @@
         background-image: url(./t5/Icone/exit.png);
         margin-left: 3%;
       }
+      .jacoco-button{
+        background-image: url(./t5/Icone/jacoco.png);
+        margin-left: 3%;
+      }
+      
 
       .CodeMirror {
         float: left;
@@ -372,6 +377,8 @@
           <button id="compileButton" class="compile-button" title="Compile"></button>
           <button id="runButton" class="run-button" title="Start Game"></button>
           <button id="coverageButton" class="coverage-button" title="Run UserTest"></button>
+          <button id="jacocoButton" class="jacoco-button" title="Highlight Line"></button>
+
           <button id="logoutButton" class="logout-button" title="LogOut" onclick="logout()"></button>
 
         </div>
@@ -754,8 +761,8 @@
       */
       //risultati JACOCO da T7
       var coverageButton = document.getElementById("coverageButton");
-        coverageButton.addEventListener("click", processJaCoCoReport);
-        function processJaCoCoReport() {
+        coverageButton.addEventListener("click", processReport);
+        function processReport() {
           // Effettua una richiesta al tuo controller Spring per ottenere il file di output di JaCoCo
           var formData = new FormData();
           formData.append("testingClassName", "NomeClasseTest.java");
@@ -786,6 +793,37 @@
             }
           });
         }
+
+        var jacocoButton = document.getElementById("jacocoButton");
+        jacocoButton.addEventListener("click", processJaCoCoReport);
+        function processJaCoCoReport() {
+          // Effettua una richiesta al tuo controller Spring per ottenere il file di output di JaCoCo
+          var formData = new FormData();
+          formData.append("testingClassName", "NomeClasseTest.java");
+          formData.append("testingClassCode", editor.getValue());
+          formData.append("underTestClassName", localStorage.getItem("classe")+".java");
+          formData.append("underTestClassCode", sidebarEditor.getValue());
+
+          $.ajax({
+            url: "http://localhost/api/getJaCoCoReport",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            dataType: "xml", //potrebbe essere anche giusto leggere da un file xml di report di JaCoCo
+            success: function(reportContent) {
+              console.log(reportContent);
+              // Una volta ricevuto il file di output di JaCoCo, elabora il contenuto
+              highlightCodeCoverage(reportContent);
+            },
+            error: function() {
+              alert("Si è verificato un errore. Assicurati prima che la compilazione vada a buon fine!");
+              console.log("Errore durante il recupero del file di output di JaCoCo.");
+            }
+          });
+        }
+
+
         function highlightCodeCoverage(reportContent) {
           // Analizza il contenuto del file di output di JaCoCo per individuare le righe coperte, non coperte e parzialmente coperte
           // Applica lo stile appropriato alle righe del tuo editor

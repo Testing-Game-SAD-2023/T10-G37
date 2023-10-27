@@ -12,6 +12,7 @@ public class Config {
     final static String testingClassPath   = usr_path + sep + "ClientProject" +sep + "src" + sep + "test" + sep + "java"+sep +"ClientProject" + sep;
     final static String underTestClassPath = usr_path + sep + "ClientProject" +  sep + "src" +  sep + "main" +  sep + "java" +  sep + "ClientProject" + sep;
     final static String coverageFolder = usr_path + sep + "ClientProject" + sep + "evosuite-report" + sep + "statistics.csv" + sep;
+    final static String xmlFolder = usr_path + sep + "ClientProject" + sep + "target" + sep + "site" + sep + "jacoco" + sep + "jacoco.xml" + sep;
 
 
     public static String getTestingClassPath ()   {return testingClassPath;}
@@ -20,5 +21,7 @@ public class Config {
     public static String getpathCompiler(){return pathCompiler;}
     public static String getpackageDeclaretion(){return packageDeclaration;}
     public static String getCoverageFolder(){return coverageFolder;}
+        public static String getxmlFolder(){return xmlFolder;}
+
 
 }
