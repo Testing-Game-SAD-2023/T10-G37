@@ -48,7 +48,7 @@ public class App {
 				// Verificare se la riga ha il formato desiderato
 				if (nextLine[1].equals("LINE")) {
 
-					// Estrai e converti il valore in double, moltiplica per 100 e converte in intero
+					// Estrai e converti il valore in double, moltiplica per 100 e converte in stringa
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
                     int coverage= (int) coverageDouble;
                     String cov= String.valueOf(coverage);
@@ -63,7 +63,7 @@ public class App {
 		}
 	
 		// Restituire un valore predefinito se il valore non è stato trovato
-		return "Errore csvCoverage"; // Cambia il valore predefinito a seconda delle tue esigenze
+		return "Errore csvCoverage"; 
 	}
     
 
@@ -90,10 +90,6 @@ public class App {
         System.out.println("Codice correttamente salvato " + Config.getUnderTestClassPath());
         saveCodeToFile(underTestClassName, underTestClassCode, Config.getUnderTestClassPath());
 
-        
-        //Aggiunge la dichiarazione del package ai file java ricevuti.
-        //addPackageDeclaration(firstFilePath, secondFilePath);
-
         //Output di ritorno del comando maven.
         String []output_maven={""};
 
@@ -103,8 +99,9 @@ public class App {
 
         
         if(compileExecuteCovarageWithMaven(output_maven,request)){
-            //String retCsv = readFileToString(Config.getCoverageFolder());
+            //Salvo il path in cui verrà inserito il file csv
             Path path = Paths.get(Config.getCoverageFolder());
+            //Estraggo il valore della copertura per linee tramite la funzione LineCoverageCSV
             String coverage=LineCoverageCSV(Config.getCoverageFolder());
             try {
                 Files.delete(path);
@@ -112,14 +109,14 @@ public class App {
             } catch (IOException e) {
                 System.err.println("Impossibile eliminare il file: " + e.getMessage());
             }
-
-
+            //Costruisco la risposta con i valori ottenuti
             response.setError(false);
             response.setoutCompile(output_maven[0]);
             response.setCoverage(coverage);
 
         }else
         {
+            //Costruisco la risposta di errore
             response.setError(true);
             response.setoutCompile(output_maven[0]);
             response.setCoverage(null);            
@@ -136,29 +133,6 @@ public class App {
         return contents;
     }
 
-
-    /*/**
-     * Metodo per dichiarare i package all'interno dei file ".java".
-     * @param file1path Path del primo file.
-     * @param file2Path Path del secondo file.
-     * @throws IOException Se ci sono errori I/O di lettura o scrittura su file.
-     * @throws InterruptedException
-     */
-    /* 
-    private static void addPackageDeclaration(Path file1Path, Path file2Path) throws IOException {
-        String packageDeclaration = Config.getpackageDeclaretion();
-    
-        String file1Content = Files.readString(file1Path, StandardCharsets.UTF_8);
-        String file2Content = Files.readString(file2Path, StandardCharsets.UTF_8);
-    
-        file1Content = packageDeclaration + file1Content;
-        file2Content = packageDeclaration + file2Content;
-    
-        Files.write(file1Path, file1Content.getBytes(StandardCharsets.UTF_8));
-        Files.write(file2Path, file2Content.getBytes(StandardCharsets.UTF_8));
-    }
-
-    */
     
     private void deleteFile(String underTestClassName, String testingClassName)throws IOException
     {
@@ -167,68 +141,19 @@ public class App {
         File file2 = new File(Config.getTestingClassPath() + testingClassName);
         file2.delete();
     }
-   
 
-    //esegue compilazione con maven per ritornare eventuali errori utente
-    /*    VECCHIA VERSIOONE
-     private static boolean compileExecuteCovarageWithMaven(String []ret) throws IOException, InterruptedException {
-
-        ProcessBuilder processBuilder = new ProcessBuilder();
-
-        processBuilder.command("mvn", "clean", "compile", "test");
-        processBuilder.directory(new File(Config.getpathCompiler()));
-    
-        Process process = processBuilder.start();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null)
-            ret[0] += line += "\n";
-        int exitCode = process.waitFor();
-       
-        // Legge il contenuto del buffer del terminale
-        // InputStream inputStream = process.getInputStream();
-        // byte[] buffer = new byte[inputStream.available()];
-        // inputStream.read(buffer);
-        // ret[0] = new String(buffer, StandardCharsets.UTF_8);
-        if (exitCode == 0) {
-            System.out.println("Maven clean compile executed successfully.");
-            return true;
-        } else {
-            System.out.println("Error executing Maven clean compile.");
-            return false;
-        }
-
-    }*/
 private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO request) throws IOException, InterruptedException {
-
-        
     
         String nome_test=request.getTestingClassName();
         String nome_classe=request.getUnderTestClassName();
         String nome_t = nome_test.replace(".java", "");
-        String nome_c = nome_classe.replace(".java", "");
-        System.out.println("Nome test " + nome_test +" nome Classe "+ nome_classe + " Path directory  " + Config.getpathCompiler());
-        /* ProcessBuilder inizia = new ProcessBuilder();
-        inizia.command("mvn clean compile");
-        inizia.directory(new File(Config.getpathCompiler()));
-        inizia.start();
-        
-        String command = "java -jar evosuite-1.0.6.jar -measureCoverage -class ClientProject." + nome_classe + " Djunit=ClientProject." + nome_test + " -projectCP /ClientProject/target/classes:/ClientProject/target/test-classes -Dcriterion=LINE";
-
-        processBuilder.command("sh", "-c", command);
-        processBuilder.directory(new File(Config.getpathCompiler()));
-    
-        Process process = processBuilder.start();*/
-        
+        String nome_c = nome_classe.replace(".java", "");        
         ProcessBuilder processBuilder = new ProcessBuilder("sh", "codice.sh", nome_c, nome_t);
         processBuilder.directory(new File(Config.getpathCompiler())); // Imposta la directory di lavoro corretta
         
         // Reindirizza l'output di errore standard (stderr) del processo
-        processBuilder.redirectErrorStream(true);
-        
-        Process process = processBuilder.start();
-        
+        processBuilder.redirectErrorStream(true);        
+        Process process = processBuilder.start();        
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
         while ((line = reader.readLine()) != null) {
@@ -263,8 +188,6 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
     private Path saveCodeToFile(String nameclass, String code, String path) throws IOException {
         String packageDeclaration = Config.getpackageDeclaretion();
         code = packageDeclaration + code;
-        System.out.println("codice " + code);
-        System.out.println("Path " + path );
         File tempFile = new File(path + nameclass);
         tempFile.deleteOnExit();
         try (FileWriter writer = new FileWriter(tempFile)) {

@@ -149,6 +149,11 @@
         background-image: url(./t5/Icone/search.png);
         margin-left: 3%;
       }
+      .logout-button{
+        background-image: url(./t5/Icone/exit.png);
+        margin-left: 3%;
+      }
+
       .CodeMirror {
         float: left;
         width: 100%;
@@ -367,7 +372,11 @@
           <button id="compileButton" class="compile-button" title="Compile"></button>
           <button id="runButton" class="run-button" title="Start Game"></button>
           <button id="coverageButton" class="coverage-button" title="Run UserTest"></button>
+          <button id="logoutButton" class="logout-button" title="LogOut" onclick="logout()"></button>
+
         </div>
+
+
         <textarea id="editor" name="editor">
           import org.junit.Before;
           import org.junit.After;
@@ -637,24 +646,6 @@
       //esecuzione ricevendo XML da T7 e mandando partita a T4
       var runButton = document.getElementById("runButton");
       runButton.addEventListener("click", function() {
-        //   $(document).ready(function() {
-        //   $.ajax({
-        //     url: "http://localhost:80/getResultXml",
-        //     type: "GET",
-        //     dataType: "text",
-        //     success: function(xmlContent) {
-        //       // Utilizza il contenuto del file XML come desideri
-        //       console.log(xmlContent);
-
-        //       // Imposta il contenuto della console CodeMirror con i risultati del file XML
-        //       consoleArea2.setValue(xmlContent);
-        //     },
-        //     error: function() {
-        //       // Gestisci l'errore, ad esempio mostra un messaggio di errore
-        //       console.log("Errore durante il recupero del file XML.");
-        //     }
-        //   });
-        // });
         $(document).ready(function() {
           if(localStorage.getItem("turnId") == null) {
             alert("Hai già sottomesso il tuo tentativo!");
@@ -1094,8 +1085,14 @@
         var robot = "[[${robot}]]";
         var username = "[[${username}]]";
         var gameIDJ = "[[${gameIDj}]]";
-  
-
       </script>
+
+          <!-- Funzione JavaScript per il logout -->
+    <script type="text/javascript">
+      function logout() {
+          // Effettua il reindirizzamento alla pagina di logout (assumi che sia /logout)
+          window.location.href = "/logout";
+      }
+  </script>
   </body>
 </html>

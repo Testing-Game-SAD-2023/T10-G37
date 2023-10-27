@@ -619,6 +619,7 @@ input[type="password"]:-webkit-autofill {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 .submit-button:focus {
   outline:none; /* Rimuove il colore di sfondo dei bordi quando il tasto è attivo (focus) */
 }

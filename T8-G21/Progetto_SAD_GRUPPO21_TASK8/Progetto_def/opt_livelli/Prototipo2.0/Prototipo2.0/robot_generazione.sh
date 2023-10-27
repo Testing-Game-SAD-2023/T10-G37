@@ -82,7 +82,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -106,7 +105,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -128,7 +126,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -150,7 +147,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -172,7 +168,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -194,7 +189,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -216,7 +210,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -238,7 +231,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -260,7 +252,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -282,7 +273,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -304,7 +294,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -326,7 +315,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 
@@ -348,7 +336,6 @@ export CLASSPATH=target/classes:evosuite-standalone-runtime-1.0.6.jar:evosuite-t
 
 ##########################################################################
 javac evosuite-tests/*.java
-#javac evosuite-tests/$NOME_CLASSE/*.java
 
 java org.junit.runner.JUnitCore ${NOME_CLASSE}_ESTest
 

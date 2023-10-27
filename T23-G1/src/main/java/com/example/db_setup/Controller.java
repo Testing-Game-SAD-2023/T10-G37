@@ -229,7 +229,6 @@ public class Controller {
         Cookie jwtTokenCookie = new Cookie("jwt", null);
         jwtTokenCookie.setMaxAge(0);
         response.addCookie(jwtTokenCookie);
-
         return new ModelAndView("redirect:http://localhost/login"); 
     }
 
@@ -246,6 +245,7 @@ public class Controller {
         response.addCookie(jwtTokenCookie);
 
         authenticatedUserRepository.delete(authenticatedUser);
+
         return ResponseEntity.ok("Logout successful");
     }
 

@@ -37,7 +37,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.json.JSONObject;
 import org.apache.http.client.utils.URIBuilder;
-//import net.minidev.json.JSONObject;
 
 @CrossOrigin
 @Controller
@@ -127,46 +126,6 @@ public class MyController {
         return Files.readAllBytes(path);
     }
 
-    // @PostMapping("/getResultXml")
-    // public String handleGetResultXmlRequest() {
-    // // try {
-    // // // Esegui la richiesta HTTP al servizio di destinazione
-    // // HttpPost httpPost = new HttpPost("URL_DEL_SERVIZIO_DESTINAZIONE");
-    // // JSONObject obj = new JSONObject();
-
-    // // obj.put("testingClassName", request.getParameter("testingClassName"));
-    // // obj.put("testingClassCode", request.getParameter("testingClassCode"));
-    // // obj.put("underTestClassName", request.getParameter("underTestClassName"));
-    // // obj.put("underTestClassCode", request.getParameter("underTestClassCode"));
-    // // StringEntity jsonEntity = new StringEntity(obj.toString(),
-    // ContentType.APPLICATION_JSON);
-
-    // // httpPost.setEntity(jsonEntity);
-    // // HttpResponse targetServiceResponse = httpClient.execute(httpPost);
-
-    // // // Verifica lo stato della risposta
-    // // int statusCode = targetServiceResponse.getStatusLine().getStatusCode();
-    // // if (statusCode == HttpStatus.OK.value()) {
-    // // // Leggi il contenuto del file XML dalla risposta
-    // // HttpEntity entity = targetServiceResponse.getEntity();
-    // // String compileContent = EntityUtils.toString(entity);
-
-    // // String responseBody = EntityUtils.toString(entity);
-    // // JSONObject responseObj = new JSONObject(responseBody);
-    // // // Restituisci il contenuto del file XML come risposta al client
-    // // return xmlContent;
-    // // } else {
-    // // // Restituisci un messaggio di errore al client
-    // // return "Errore durante il recupero del file XML.";
-    // // }
-    // // } catch (Exception e) {
-    // // // Gestisci eventuali errori e restituisci un messaggio di errore al
-    // client
-    // // return "Si è verificato un errore durante la richiesta del file XML.";
-    // // }
-    // }
-    // FUNZIONE CHE DOVREBBE RICEVERE I RISULTATI DEI ROBOT
-
     @PostMapping("/run") // NON ESISTE NESSUN INTERFACCIA VERSO I COMPILATORI DEI ROBOT EVOSUITE E
                          // RANDOOP
     public ResponseEntity<String> runner(HttpServletRequest request) {
@@ -198,12 +157,11 @@ public class MyController {
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
 
-            String xml_string = responseObj.getString("coverage");
-            System.out.println("Score Utente : "+ xml_string);
+            String coverage = responseObj.getString("coverage");
+            System.out.println("Score Utente : "+ coverage);
             String outCompile = responseObj.getString("outCompile");
             // PRESA DELLO SCORE UTENTE
-           // int userScore = ParseUtil.LineCoverage(xml_string);
-           Integer userScore= Integer.parseInt(xml_string);
+           Integer userScore= Integer.parseInt(coverage);
 
             // RISULTATI ROBOT VERSO TASK4
             URIBuilder builder = new URIBuilder("http://t4-g18-app-1:3000/robots");
@@ -301,7 +259,7 @@ public class MyController {
             // costruzione risposta verso task5
             JSONObject result = new JSONObject();
             result.put("outCompile", outCompile);
-            result.put("coverage", xml_string);
+            result.put("coverage", coverage);
             result.put("win", userScore >= roboScore);
             result.put("robotScore", roboScore);
             result.put("score", userScore);
@@ -317,33 +275,6 @@ public class MyController {
         }
     }
 
-    // FUNZIONE CHE DOVREBBE RICEVERE I RISULTATI DEI ROBOT
-    // @GetMapping("/getResultRobot")
-    // public String handleGetResultRobotRequest() {
-    //     try {
-    //         // Esegui la richiesta HTTP al servizio di destinazione
-    //         HttpGet httpGet = new HttpGet("URL_DEL_SERVIZIO_DESTINAZIONE");
-
-    //         HttpResponse targetServiceResponse = httpClient.execute(httpGet);
-
-    //         // Verifica lo stato della risposta
-    //         int statusCode = targetServiceResponse.getStatusLine().getStatusCode();
-    //         if (statusCode == HttpStatus.OK.value()) {
-    //             // Leggi il contenuto del file XML dalla risposta
-    //             HttpEntity entity = targetServiceResponse.getEntity();
-    //             String xmlContent = EntityUtils.toString(entity);
-
-    //             // Restituisci il contenuto del file XML come risposta al client
-    //             return xmlContent;
-    //         } else {
-    //             // Restituisci un messaggio di errore al client
-    //             return "Errore durante il recupero del file XML.";
-    //         }
-    //     } catch (Exception e) {
-    //         // Gestisci eventuali errori e restituisci un messaggio di errore al client
-    //         return "Si è verificato un errore durante la richiesta del file XML.";
-    //     }
-    // }
 
     @PostMapping("/getReport")
     public ResponseEntity<String> getJaCoCoReport(HttpServletRequest request) {
@@ -372,53 +303,17 @@ public class MyController {
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
 
-            String xml_string = responseObj.getString("coverage");
-            System.out.println("Score Utente : "+ xml_string);
+            String coverage = responseObj.getString("coverage");
+            System.out.println("Score Utente : "+ coverage);
 
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
-            // headers.setContentDisposition(ContentDisposition.attachment().filename("index.html").build());
 
-            return new ResponseEntity<>(xml_string, headers, HttpStatus.OK);
+            return new ResponseEntity<>(coverage, headers, HttpStatus.OK);
         } catch (IOException e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // @PostMapping("/inviaDatiEFile")
-    // public ResponseEntity<String> handleInviaDatiEFileRequest(
-    //         @RequestParam("idUtente") String idUtente,
-    //         @RequestParam("idPartita") String idPartita,
-    //         @RequestParam("idTurno") String idTurno,
-    //         @RequestParam("robotScelto") String robotScelto,
-    //         @RequestParam("difficolta") String difficolta,
-    //         @RequestParam("file") MultipartFile file,
-    //         @RequestParam("playerTestClass") String playerTestClass) {
-    //     try {
-    //         // Creazione di una richiesta HTTP POST al servizio di destinazione
-    //         HttpPost httpPost = new HttpPost("URL_DEL_SERVIZIO_DESTINAZIONE");// CHIAMA UPDATE TURN TASK4
-    //         // Creazione del corpo della richiesta multipart
-    //         MultipartEntityBuilder entityBuilder = MultipartEntityBuilder.create()
-    //                 .addTextBody("idUtente", idUtente)
-    //                 .addTextBody("idPartita", idPartita)
-    //                 .addTextBody("idTurno", idTurno)
-    //                 .addTextBody("robotScelto", robotScelto)
-    //                 .addTextBody("difficolta", difficolta)
-    //                 .addTextBody("playerTestClass", playerTestClass); // Aggiungi la classe Java come parte del corpo
-    //                                                                   // della richiesta
-    //         // .addBinaryBody("file", file.getBytes(), ContentType.APPLICATION_OCTET_STREAM,
-    //         // file.getOriginalFilename());
-
-    //         // Esecuzione della richiesta HTTP al servizio di destinazione
-    //         HttpResponse targetServiceResponse = httpClient.execute(httpPost);
-    //         // Restituisci una risposta di successo
-    //         return ResponseEntity.ok("Dati, file e classe Java inviati con successo");
-    //     } catch (Exception e) {
-    //         // Gestisci eventuali errori e restituisci una risposta di errore
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-    //                 .body("Errore durante l'invio dei dati, del file e della classe Java");
-    //     }
-    // }
 }
