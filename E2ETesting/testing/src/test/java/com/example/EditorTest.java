@@ -125,6 +125,22 @@ public class EditorTest {
                 urlPaginaDiRedirezione);
     }
 
+        @Test
+    public void logout() {
+        String urlPaginaDiRedirezione = "http://localhost/login";
+        moveToEditor(urlPaginaDiRedirezione);
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        driver.findElement(By.id("logoutButton")).click();
+
+        try {
+            wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
+        } catch (TimeoutException e) {
+            Assert.fail();
+        }
+    }
+
+
     @Test
     public void compile() {
         String urlPaginaDiRedirezione = "http://localhost/editor";
@@ -178,7 +194,7 @@ public class EditorTest {
         alert.accept();
 
         // Ora puoi verificare il testo dell'alert e assegnare l'esito del test
-        if (alertText.equals("Risultato coperture Test utente : 0 %")) {
+        if (alertText.equals("Risultato copertura Test utente : 0 %")) {
             // La condizione desiderata è verificata, quindi il test ha esito positivo
             System.out.println("Esito positivo: Copertura test utente è al 0%.");
         } else {
