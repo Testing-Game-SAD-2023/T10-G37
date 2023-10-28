@@ -17,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.Alert;
 
@@ -43,8 +44,8 @@ public class EditorTest {
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 
         driver.get("http://localhost/login");
-        driver.findElement(By.id("email")).sendKeys("pippobaudo@gmail.com");
-        driver.findElement(By.id("password")).sendKeys("Pippino0");
+        driver.findElement(By.id("email")).sendKeys("test@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("Testpass0");
 
         // Ora esegui l'istruzione desiderata
         driver.findElement(By.cssSelector("input[type=submit]")).click();
@@ -124,14 +125,15 @@ public class EditorTest {
         Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", driver.getCurrentUrl(),
                 urlPaginaDiRedirezione);
     }
-
-        @Test
+/*
+    @Test
     public void logout() {
         String urlPaginaDiRedirezione = "http://localhost/login";
         moveToEditor(urlPaginaDiRedirezione);
 
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         driver.findElement(By.id("logoutButton")).click();
+        driver.findElement(By.cssSelector("input[type=submit]")).click();
 
         try {
             wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
@@ -139,6 +141,25 @@ public class EditorTest {
             Assert.fail();
         }
     }
+*/
+    @Test
+    public void logout() {
+    String urlPaginaDiRedirezione = "http://localhost/editor";
+    moveToEditor(urlPaginaDiRedirezione);
+
+    WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+    // Cerca l'elemento in base alla classe CSS e poi simula il click
+    //Thread.sleep(1000);
+    driver.findElement(By.id("logoutButton")).click();
+    //Thread.sleep(1000);
+    try {
+        wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
+    } catch (TimeoutException e) {
+        Assert.fail();
+    }
+}
+
 
 
     @Test
@@ -164,6 +185,51 @@ public class EditorTest {
             Assert.fail();
         }
     }
+
+
+
+
+
+
+
+
+    @Test
+    public void logoutEditor() {
+        String urlPaginaDiRedirezione = "http://localhost/editor";
+        moveToEditor(urlPaginaDiRedirezione);
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        try {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(
+                    By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch (TimeoutException e) {
+            Assert.fail();
+        }
+
+        driver.findElement(By.id("logoutButton")).click();
+
+        try {
+            wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
+        } catch (TimeoutException e) {
+            Assert.fail();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Test
     public void coverage() {
