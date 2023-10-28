@@ -221,7 +221,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
 
         ProcessBuilder processBuilder = new ProcessBuilder();
 
-        processBuilder.command("mvn", "clean", "compile", "test");
+        processBuilder.command("mvn", "clean", "install");
         processBuilder.directory(new File(Config.getpathCompiler()));
     
         Process process = processBuilder.start();

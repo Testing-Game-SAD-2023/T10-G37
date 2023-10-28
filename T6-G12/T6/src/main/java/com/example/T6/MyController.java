@@ -260,7 +260,7 @@ public class MyController {
             // costruzione risposta verso task5
             JSONObject result = new JSONObject();
             result.put("outCompile", outCompile);
-            result.put("statistic", statistic);
+            result.put("statistic", coverage);
             result.put("win", userScore >= roboScore);
             result.put("robotScore", roboScore);
             result.put("score", userScore);
@@ -344,14 +344,15 @@ public class MyController {
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
 
-            String coverage = responseObj.getString("coverage");
-            System.out.println("Score Utente : "+ coverage);
+            String statistic = responseObj.getString("coverage");
+            String [] coverage = statistic.split(" ");
+            System.out.println("Score Utente : "+ coverage[1]);
 
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
 
-            return new ResponseEntity<>(coverage, headers, HttpStatus.OK);
+            return new ResponseEntity<>(coverage[1], headers, HttpStatus.OK);
         } catch (IOException e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

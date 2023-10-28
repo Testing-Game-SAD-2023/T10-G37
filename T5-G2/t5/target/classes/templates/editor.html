@@ -494,7 +494,7 @@
         autofocus: true
       });
       var consoleArea2 = CodeMirror.fromTextArea(document.getElementById("console-textarea2"), {
-        mode: "javascript",
+        mode: "html",
         lineWrapping: true,
         theme: "lucario",
         electricChars: true,
@@ -687,15 +687,18 @@
   Il tuo punteggio: ${response.score.toString()}% LOC
   Il punteggio del robot: ${response.robotScore.toString()}% LOC
   Le restanti statistiche sono :
-  Branch: ${response.statistic[2]}% LOC
-  WeakMutation: ${response.statistic[3]}%LOC
-  Exception: ${response.statistic[4]}% LOC
-  Method: ${response.statistic[5]}%LOC
-  Output: ${response.statistic[6]}%LOC
-  CBranch: ${response.statistic[7]}% LOC
-  MethodNoException: ${response.statistic[8]}%LOC`
+  Branch:            ${response.statistic[2]} % LOC
+  WeakMutation:      ${response.statistic[3]} % LOC
+  Exception:         ${response.statistic[4]} % LOC
+  Method:            ${response.statistic[5]} % LOC
+  Output:            ${response.statistic[6]} % LOC
+  CBranch:           ${response.statistic[7]} % LOC
+  MethodNoException: ${response.statistic[8]} % LOC`
   
   );
+
+
+
                 
                 alert(response.win == true ? "Hai vinto!" : "Hai perso!");
                 localStorage.clear();
@@ -772,7 +775,11 @@
       //risultati JACOCO da T7
       var coverageButton = document.getElementById("coverageButton");
         coverageButton.addEventListener("click", processReport);
+        
         function processReport() {
+          if(localStorage.getItem("turnId") == null) {
+            alert("Hai già sottomesso il tuo tentativo!");
+          } else {          
           // Effettua una richiesta al tuo controller Spring per ottenere il file di output di JaCoCo
           var formData = new FormData();
           formData.append("testingClassName", "NomeClasseTest.java");
@@ -803,10 +810,14 @@
             }
           });
         }
+      }
 
         var jacocoButton = document.getElementById("jacocoButton");
         jacocoButton.addEventListener("click", processJaCoCoReport);
         function processJaCoCoReport() {
+          if(localStorage.getItem("turnId") == null) {
+            alert("Hai già sottomesso il tuo tentativo!");
+          } else {
           // Effettua una richiesta al tuo controller Spring per ottenere il file di output di JaCoCo
           var formData = new FormData();
           formData.append("testingClassName", "NomeClasseTest.java");
@@ -832,6 +843,7 @@
             }
           });
         }
+      }
 
 
         function highlightCodeCoverage(reportContent) {
