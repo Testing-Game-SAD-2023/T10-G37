@@ -106,6 +106,8 @@ public class App {
             Path path = Paths.get(Config.getCoverageFolder());
             //Estraggo il valore della copertura per linee tramite la funzione LineCoverageCSV
             String coverage=LineCoverageCSV(Config.getCoverageFolder());
+            String retXmlJacoco = readFileToString(Config.getxmlFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
+
             try {
                 Files.delete(path);
                 System.out.println("Il file è stato eliminato con successo.");
@@ -116,13 +118,15 @@ public class App {
             response.setError(false);
             response.setoutCompile(output_maven[0]);
             response.setCoverage(coverage);
+            response.setXml(retXmlJacoco);
 
         }else
         {
             //Costruisco la risposta di errore
             response.setError(true);
             response.setoutCompile(output_maven[0]);
-            response.setCoverage(null);            
+            response.setCoverage(null);  
+            response.setXml(null);          
         }
         deleteFile(underTestClassName, testingClassName);
         return response;
@@ -148,7 +152,7 @@ public class App {
         String []output_maven={""};
 
         ResponseDTO response = new ResponseDTO();        
-        if(highlight(output_maven)){
+        if(compileExecuteCovarageWithMaven(output_maven,request)){
             String retXmlJacoco = readFileToString(Config.getxmlFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
             response.setError(false);
             response.setoutCompile(output_maven[0]);
@@ -217,7 +221,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
     }
 
 
-    private static boolean highlight(String []ret) throws IOException, InterruptedException {
+    /*private static boolean highlight(String []ret) throws IOException, InterruptedException {
 
         ProcessBuilder processBuilder = new ProcessBuilder();
 
@@ -245,7 +249,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
             return false;
         }
 
-    }
+    }*/
 
 
    
@@ -309,6 +313,7 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         private Boolean error;
         private String outCompile;
         private String coverage;
+        private String xml;
 
 
         public Boolean getError(){
@@ -320,6 +325,10 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         }
         public String getCoverage(){
             return coverage;
+        }
+
+        public String getXml(){
+            return xml;
         }
 
         public void setError(boolean error)
@@ -335,6 +344,10 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         public void setCoverage(String coverage)
         {
             this.coverage = coverage;
+        }
+         public void setXml(String xml)
+        {
+            this.xml = xml;
         }
 
 

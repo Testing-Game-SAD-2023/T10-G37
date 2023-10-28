@@ -161,6 +161,9 @@ public class MyController {
             String [] coverage=statistic.split(" ");
             System.out.println("Score Utente : "+ coverage[1]);
             String outCompile = responseObj.getString("outCompile");
+            String xml_string = responseObj.getString("xml");
+
+
             // PRESA DELLO SCORE UTENTE
            Integer userScore= Integer.parseInt(coverage[1]);
 
@@ -264,6 +267,7 @@ public class MyController {
             result.put("win", userScore >= roboScore);
             result.put("robotScore", roboScore);
             result.put("score", userScore);
+            result.put("xml",xml_string);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

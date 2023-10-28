@@ -13,6 +13,10 @@
 
     <div class="mt-2 row">
         <p class="user_position_main" style="color: white; font-family: Arial, Helvetica, sans-serif; font-weight: bold;">Username: <span id="usernameField"></span></p>
+        <div class="col-3">
+        <button id="logoutButton" type="button" style="margin-bottom:-50px" class="btn custom-button" th:onclick="logout()">Logout</button>
+        </div>
+            </div>
     </div>
     <div class="container">
         <div class="mt-0 row">
@@ -50,8 +54,6 @@
             <div class="div_back_main">
                 <button id="downloadButton" type="button" class="btn custom-button" th:onclick="downloadFile()">Download</button>
                 <button type="button" class="btn custom-button" th:onclick="redirectToPagereport(); saveLoginData()">Submit</button>
-                <!-- Bottone di logout -->
-                <button type="button" class="btn custom-button" onclick="logout()">Logout</button>
             </div>
         </div>
     </div>

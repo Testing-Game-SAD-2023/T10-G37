@@ -679,6 +679,8 @@
               dataType: "json",
               success: function(response) {
                 console.log(response);
+                console.log(" contenuto xml " + response.xml);
+                highlightCodeCoverage($.parseXML(response.xml));
 
                 consoleArea.setValue(response.outCompile);
                 
