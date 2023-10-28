@@ -80,7 +80,6 @@ public class EditorTest {
 
     public void moveToReport(String urlPaginaDiRedirezione) {
         driver.findElement(By.id("0")).click();
-        // driver.findElement(By.id("0-1")).click();
         driver.findElement(By.xpath("//*[@id='0-randoop lvl 1']")).click();
         driver.findElementsByCssSelector(".div_buttons_main > * button").get(1).click();
 
@@ -125,23 +124,7 @@ public class EditorTest {
         Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", driver.getCurrentUrl(),
                 urlPaginaDiRedirezione);
     }
-/*
-    @Test
-    public void logout() {
-        String urlPaginaDiRedirezione = "http://localhost/login";
-        moveToEditor(urlPaginaDiRedirezione);
 
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
-        driver.findElement(By.id("logoutButton")).click();
-        driver.findElement(By.cssSelector("input[type=submit]")).click();
-
-        try {
-            wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
-        } catch (TimeoutException e) {
-            Assert.fail();
-        }
-    }
-*/
     @Test
     public void logout() {
     String urlPaginaDiRedirezione = "http://localhost/editor";
@@ -149,10 +132,8 @@ public class EditorTest {
 
     WebDriverWait wait = new WebDriverWait(driver, timeout);
 
-    // Cerca l'elemento in base alla classe CSS e poi simula il click
-    //Thread.sleep(1000);
     driver.findElement(By.id("logoutButton")).click();
-    //Thread.sleep(1000);
+
     try {
         wait.until(ExpectedConditions.urlToBe("http://localhost/login"));
     } catch (TimeoutException e) {
@@ -187,12 +168,6 @@ public class EditorTest {
     }
 
 
-
-
-
-
-
-
     @Test
     public void logoutEditor() {
         String urlPaginaDiRedirezione = "http://localhost/editor";
@@ -217,20 +192,6 @@ public class EditorTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Test
     public void coverage() {
         String urlPaginaDiRedirezione = "http://localhost/editor";
@@ -247,53 +208,21 @@ public class EditorTest {
 
         driver.findElement(By.id("coverageButton")).click();
 
-        // Aspetta che un alert sia presente
         wait.until(ExpectedConditions.alertIsPresent());
 
-        // Ottieni l'alert
         Alert alert = driver.switchTo().alert();
 
-        // Ottieni il testo dall'alert
         String alertText = alert.getText();
         System.out.println(alertText);    
-        // Chiudi l'alert
         alert.accept();
 
-        // Ora puoi verificare il testo dell'alert e assegnare l'esito del test
         if (alertText.equals("Risultato copertura Test utente : 0 %")) {
-            // La condizione desiderata è verificata, quindi il test ha esito positivo
             System.out.println("Esito positivo: Copertura test utente è al 0%.");
         } else {
             Assert.fail("Esito negativo: Copertura test utente non è al 0%.");
         }
     }
 
-    /*
-     * @Test
-     * public void coverage() {
-     * String urlPaginaDiRedirezione = "http://localhost/editor";
-     * moveToEditor(urlPaginaDiRedirezione);
-     * 
-     * WebDriverWait wait = new WebDriverWait(driver, timeout);
-     * 
-     * try {
-     * wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
-     * cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
-     * } catch(TimeoutException e) {
-     * Assert.fail();
-     * }
-     * 
-     * driver.findElement(By.id("coverageButton")).click();
-     * 
-     * try {
-     * wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.
-     * cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > * .uncovered-line"
-     * ), 0));
-     * } catch(TimeoutException e) {
-     * Assert.fail();
-     * }
-     * }
-     */
 
     @Test
     public void run() {
