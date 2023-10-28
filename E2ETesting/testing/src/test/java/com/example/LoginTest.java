@@ -36,8 +36,8 @@ public class LoginTest {
     @Test
     public void validCredentials(){
         driver.get("http://localhost/login");	
-        driver.findElement(By.id("email")).sendKeys("pippobaudo@gmail.com");
-        driver.findElement(By.id("password")).sendKeys("Pippino0");
+        driver.findElement(By.id("email")).sendKeys("test@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("Testpass0");
         driver.findElement(By.cssSelector("input[type=submit]")).click();
 
         WebDriverWait wait = new WebDriverWait(driver, timeout);
