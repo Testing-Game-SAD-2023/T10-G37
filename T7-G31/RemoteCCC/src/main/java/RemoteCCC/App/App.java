@@ -41,23 +41,26 @@ public class App {
 		try {
 			// Creare un oggetto CSVReader
 			CSVReader reader = new CSVReaderBuilder(new FileReader(path)).withSkipLines(1).build();
-	
+            String statistic="";
 			// Leggere le righe del file CSV
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
 				// Verificare se la riga ha il formato desiderato
-				if (nextLine[1].equals("LINE")) {
+				//if (nextLine[1].equals("LINE")) {
 
 					// Estrai e converti il valore in double, moltiplica per 100 e converte in stringa
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
                     int coverage= (int) coverageDouble;
-                    String cov= String.valueOf(coverage);
-					return  cov;
-				}
+                    statistic= statistic + " " + String.valueOf(coverage);
+					
+				//}
 			}
 	
 			// Chiudere il reader
 			reader.close();
+            System.out.println("Output CSV : " + statistic);
+            return  statistic;
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

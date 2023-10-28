@@ -685,7 +685,17 @@
                //add highlightCodeCoverage($.parseXML(response.coverage));
                 consoleArea2.setValue(`Esito Risultati (percentuale di linee coperte)
   Il tuo punteggio: ${response.score.toString()}% LOC
-  Il punteggio del robot: ${response.robotScore.toString()}% LOC`);
+  Il punteggio del robot: ${response.robotScore.toString()}% LOC
+  Le restanti statistiche sono :
+  Branch: ${response.statistic[2]}% LOC
+  WeakMutation: ${response.statistic[3]}%LOC
+  Exception: ${response.statistic[4]}% LOC
+  Method: ${response.statistic[5]}%LOC
+  Output: ${response.statistic[6]}%LOC
+  CBranch: ${response.statistic[7]}% LOC
+  MethodNoException: ${response.statistic[8]}%LOC`
+  
+  );
                 
                 alert(response.win == true ? "Hai vinto!" : "Hai perso!");
                 localStorage.clear();

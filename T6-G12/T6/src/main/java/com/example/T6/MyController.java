@@ -157,11 +157,12 @@ public class MyController {
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
 
-            String coverage = responseObj.getString("coverage");
-            System.out.println("Score Utente : "+ coverage);
+            String statistic = responseObj.getString("coverage");
+            String [] coverage=statistic.split(" ");
+            System.out.println("Score Utente : "+ coverage[1]);
             String outCompile = responseObj.getString("outCompile");
             // PRESA DELLO SCORE UTENTE
-           Integer userScore= Integer.parseInt(coverage);
+           Integer userScore= Integer.parseInt(coverage[1]);
 
             // RISULTATI ROBOT VERSO TASK4
             URIBuilder builder = new URIBuilder("http://t4-g18-app-1:3000/robots");
@@ -259,7 +260,7 @@ public class MyController {
             // costruzione risposta verso task5
             JSONObject result = new JSONObject();
             result.put("outCompile", outCompile);
-            result.put("coverage", coverage);
+            result.put("statistic", statistic);
             result.put("win", userScore >= roboScore);
             result.put("robotScore", roboScore);
             result.put("score", userScore);
