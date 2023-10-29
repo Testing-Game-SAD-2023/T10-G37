@@ -350,18 +350,3 @@ javac generazione_livelli.java
 chmod +x generazione_livelli.java
 chmod +x generazione_livelli.class
 java -cp $PERCORSO generazione_livelli
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

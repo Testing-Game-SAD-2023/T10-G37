@@ -78,7 +78,7 @@ public class RobotUtil {
 		}
 	
 		// Restituire un valore predefinito se il valore non è stato trovato
-		return -1; // Cambia il valore predefinito a seconda delle tue esigenze
+		return -1; 
 	}
 
 
@@ -88,7 +88,6 @@ public class RobotUtil {
 
     public static void generateAndSaveRobots(String fileName, String cname, MultipartFile multipartFile) throws IOException {
         
-		//Secondo me deve essere aggiunto a monte un controllo su qual è il robot che si attiva altrimenti viene eseguito sempre tutto
 		// RANDOOP - T9			    
 		Path directory = Paths.get("/VolumeT9/app/FolderTree/" + cname + "/" + cname + "SourceCode");
 		
@@ -133,7 +132,6 @@ public class RobotUtil {
 			System.out.println("ERRORE CODE: " + exitCode);
 		} catch (InterruptedException e) {
 			System.out.println(e);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -174,7 +172,6 @@ public class RobotUtil {
 		}
 		
         // EVOSUITE - T8
-		// TODO: RICHIEDE AGGIUSTAMENTI IN T8
 		Path directory2 = Paths.get("/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode");
 		
 		try {
@@ -198,10 +195,8 @@ public class RobotUtil {
 
         ProcessBuilder processBuilder2 = new ProcessBuilder();
 
-		//robot_generazione.sh VCardBean VCardBean "/mnt/c/Users/didom/Desktop/copianuovo/T10-G40-main/T8-G21/Progetto_SAD_GRUPPO21_TASK8/Progetto_def/opt_livelli/classe/VCardBean" 5
 		int l=resultsDir.listFiles().length;
 		String livelli=Integer.toString(l);
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////
         processBuilder2.command("bash", "/VolumeT8/app/Prototipo2.0/robot_generazione.sh", cname, cname,  "/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode" , livelli);
         processBuilder2.directory(new File("/VolumeT8/app/"));
     
@@ -222,7 +217,6 @@ public class RobotUtil {
 			System.out.println("ERRORE CODE: " + exitCode);
 		} catch (InterruptedException e) {
 			System.out.println(e);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -231,8 +225,6 @@ public class RobotUtil {
         File results2 [] = resultsDir2.listFiles();
         for(File result2 : results2) {
 			System.out.println(result2.getAbsolutePath());
-			//File path = new File(result2.getAbsolutePath() + "/TestReport/statistics.csv");
-			//int score=LineCoverageCSV("path:"+ path.getAbsolutePath());
 			int score = LineCoverageCSV(result2.getAbsolutePath() + "/TestReport/statistics.csv");
 
 			System.out.println(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));

@@ -45,15 +45,9 @@ public class App {
 			// Leggere le righe del file CSV
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
-				// Verificare se la riga ha il formato desiderato
-				//if (nextLine[1].equals("LINE")) {
-
-					// Estrai e converti il valore in double, moltiplica per 100 e converte in stringa
 					double coverageDouble = Double.parseDouble(nextLine[2]) * 100;
                     int coverage= (int) coverageDouble;
                     statistic= statistic + " " + String.valueOf(coverage);
-					
-				//}
 			}
 	
 			// Chiudere il reader
@@ -219,39 +213,6 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         
 
     }
-
-
-    /*private static boolean highlight(String []ret) throws IOException, InterruptedException {
-
-        ProcessBuilder processBuilder = new ProcessBuilder();
-
-        processBuilder.command("mvn", "clean", "install");
-        processBuilder.directory(new File(Config.getpathCompiler()));
-    
-        Process process = processBuilder.start();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null)
-            ret[0] += line += "\n";
-        int exitCode = process.waitFor();
-       
-        // Legge il contenuto del buffer del terminale
-        // InputStream inputStream = process.getInputStream();
-        // byte[] buffer = new byte[inputStream.available()];
-        // inputStream.read(buffer);
-        // ret[0] = new String(buffer, StandardCharsets.UTF_8);
-        if (exitCode == 0) {
-            System.out.println("Maven clean compile executed successfully.");
-            return true;
-        } else {
-            System.out.println("Error executing Maven clean compile.");
-            return false;
-        }
-
-    }*/
-
-
    
     /**
      * Metodo per salvare un file ".java"
@@ -350,8 +311,6 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
             this.xml = xml;
         }
 
-
     }
-
 
 }

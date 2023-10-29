@@ -37,9 +37,6 @@ public void listFilesInFolder(String folderPath) {
     }
 }
 
-
-     
-
     public int getClassSize() { return Class.size(); }
 
     public String getClass(int i) { return Class.get(i); }
