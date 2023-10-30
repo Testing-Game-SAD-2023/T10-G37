@@ -98,7 +98,8 @@ public class EditorTest {
 
         moveToReport(urlPaginaDiRedirezione);
 
-        Assert.assertEquals("Test fallito! La selezione non è avvenuta correttamente.", driver.getCurrentUrl(),
+        Assert.assertEquals("Test fallito! La selezione non è avvenuta correttamente.",
+            driver.getCurrentUrl(),
                 urlPaginaDiRedirezione);
     }
 
@@ -121,15 +122,14 @@ public class EditorTest {
         String urlPaginaDiRedirezione = "http://localhost/editor";
         moveToEditor(urlPaginaDiRedirezione);
 
-        Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", driver.getCurrentUrl(),
+        Assert.assertEquals("Test fallito! L'avvio della partita non è avvenuto correttamente.", 
+            driver.getCurrentUrl(),
                 urlPaginaDiRedirezione);
     }
 
     @Test
     public void logout() {
-    String urlPaginaDiRedirezione = "http://localhost/editor";
-    moveToEditor(urlPaginaDiRedirezione);
-
+    
     WebDriverWait wait = new WebDriverWait(driver, timeout);
 
     driver.findElement(By.id("logoutButton")).click();

@@ -55,7 +55,7 @@ public class LoginTest {
     @Test
     public void invalidCredentials(){
         driver.get("http://localhost/login");	
-        driver.findElement(By.id("email")).sendKeys("incorrecttest@gmail.com");
+        driver.findElement(By.id("email")).sendKeys("test@gmail.com");
         driver.findElement(By.id("password")).sendKeys("password");
         driver.findElement(By.cssSelector("input[type=submit]")).click();
 
