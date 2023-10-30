@@ -53,7 +53,7 @@ public class LoginTest {
     }
 
     @Test
-    public void invalidCredentials(){
+    public void incorrectPassword(){
         driver.get("http://localhost/login");	
         driver.findElement(By.id("email")).sendKeys("test@gmail.com");
         driver.findElement(By.id("password")).sendKeys("password");
@@ -68,5 +68,23 @@ public class LoginTest {
         }
 
         Assert.assertEquals("Test fallito! Il login è avvenuto correttamente.", driver.findElement(By.tagName("body")).getText(), "Incorrect password");
+    }
+
+    @Test
+    public void incorrectEmail(){
+        driver.get("http://localhost/login");	
+        driver.findElement(By.id("email")).sendKeys("incorrecttest@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.cssSelector("input[type=submit]")).click();
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        try {
+            wait.until(ExpectedConditions.textToBe(By.tagName("body"), "Email not found"));
+        } catch(TimeoutException e) {
+            Assert.fail();
+        }
+
+        Assert.assertEquals("Test fallito! Il login è avvenuto correttamente.", driver.findElement(By.tagName("body")).getText(), "Email not found");
     }
 }
