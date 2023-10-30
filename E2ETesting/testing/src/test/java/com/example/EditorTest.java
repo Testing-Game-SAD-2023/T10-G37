@@ -193,7 +193,7 @@ public class EditorTest {
 
 
     @Test
-    public void coverage() {
+    public void runUserTest() {
         String urlPaginaDiRedirezione = "http://localhost/editor";
         moveToEditor(urlPaginaDiRedirezione);
 
@@ -247,4 +247,28 @@ public class EditorTest {
             Assert.fail();
         }
     }
+
+
+    @Test
+    public void highlightJacoco() {
+        String urlPaginaDiRedirezione = "http://localhost/editor";
+        moveToEditor(urlPaginaDiRedirezione);
+
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+
+        try {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > *"), 1));
+        } catch(TimeoutException e) {
+            Assert.fail();
+        }
+
+        driver.findElement(By.id("jacocoButton")).click();
+
+        try {
+            wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.cssSelector("#sidebar-textarea + div > * div.CodeMirror-code > * .uncovered-line"), 0));
+        } catch(TimeoutException e) {
+            Assert.fail();
+        }
+    }
+
 }
