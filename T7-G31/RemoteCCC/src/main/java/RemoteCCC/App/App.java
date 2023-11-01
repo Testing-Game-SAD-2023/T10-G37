@@ -150,13 +150,15 @@ public class App {
             String retXmlJacoco = readFileToString(Config.getxmlFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
             response.setError(false);
             response.setoutCompile(output_maven[0]);
-            response.setCoverage(retXmlJacoco);
+            response.setCoverage(null);
+            response.setXml(retXmlJacoco);
 
         }else
         {
             response.setError(true);
             response.setoutCompile(output_maven[0]);
-            response.setCoverage(null);            
+            response.setCoverage(null);  
+            response.setXml(null);          
         }
         deleteFile(underTestClassName, testingClassName);
         return response;

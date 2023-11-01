@@ -76,8 +76,6 @@ public class RobotUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
-		// Restituire un valore predefinito se il valore non è stato trovato
 		return -1; 
 	}
 
@@ -96,7 +94,7 @@ public class RobotUtil {
 			if (!Files.exists(directory)) {
 				// Crea la directory
 				Files.createDirectories(directory);
-				System.out.println("La directory è stata creata con successo.");
+				System.out.println("La directory e' stata creata con successo.");
 			} else {
 				System.out.println("La directory esiste già.");
 			}
@@ -144,7 +142,7 @@ public class RobotUtil {
 			System.out.println(result.toString().substring(result.toString().length() - 7, result.toString().length() - 5));
 			int livello = Integer.parseInt(result.toString().substring(result.toString().length() - 7, result.toString().length() - 5));
 
-			System.out.println("La copertura del livello " + String.valueOf(livello) + " è: " + String.valueOf(score));
+			System.out.println("La copertura del livello " + String.valueOf(livello) + " e' : " + String.valueOf(score));
 
 			HttpClient httpClient = HttpClientBuilder.create().build();
 			HttpPost httpPost = new HttpPost("http://t4-g18-app-1:3000/robots");
@@ -172,13 +170,12 @@ public class RobotUtil {
 		}
 		
         // EVOSUITE - T8
-		Path directory2 = Paths.get("/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode");
-		
+		Path directory_EvoSuite = Paths.get("/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode");		
 		try {
 			// Verifica se la directory esiste già
-			if (!Files.exists(directory2)) {
+			if (!Files.exists(directory_EvoSuite)) {
 				// Crea la directory
-				Files.createDirectories(directory2);
+				Files.createDirectories(directory_EvoSuite);
 				System.out.println("La directory è stata creata con successo.");
 			} else {
 				System.out.println("La directory esiste già.");
@@ -188,31 +185,33 @@ public class RobotUtil {
 		}
 
 		try (InputStream inputStream = multipartFile.getInputStream()) {
-			Path filePath = directory2.resolve(fileName);
+			Path filePath = directory_EvoSuite.resolve(fileName);
 			System.out.println(filePath.toString());
 			Files.copy(inputStream,filePath,StandardCopyOption.REPLACE_EXISTING);
 		}
 
-        ProcessBuilder processBuilder2 = new ProcessBuilder();
-
+        ProcessBuilder processBuilderEvoSuite = new ProcessBuilder();
+		// Per simmetria, il numero di livelli generato da EvoSuite è uguale a quello di Randoop
+		// Tale numero è ottenuto considerando il numero di file prodotti
 		int l=resultsDir.listFiles().length;
 		String livelli=Integer.toString(l);
-        processBuilder2.command("bash", "/VolumeT8/app/Prototipo2.0/robot_generazione.sh", cname, cname,  "/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode" , livelli);
-        processBuilder2.directory(new File("/VolumeT8/app/"));
+        processBuilderEvoSuite.command("bash", "/VolumeT8/app/Prototipo2.0/robot_generazione.sh", 
+				cname, cname,  "/VolumeT8/app/FolderTree/" + cname + "/" + cname + "SourceCode" , livelli);
+        processBuilderEvoSuite.directory(new File("/VolumeT8/app/"));
     
-        Process process2 = processBuilder2.start();
+        Process processEvoSuite = processBuilderEvoSuite.start();
  
-        BufferedReader reader2 = new BufferedReader(new InputStreamReader(process2.getInputStream()));
-        String line2;
-        while ((line2 = reader2.readLine()) != null)
-            System.out.println(line2);
+        BufferedReader readerEvoSuite = new BufferedReader(new InputStreamReader(processEvoSuite.getInputStream()));
+        String lineEvoSuite;
+        while ((lineEvoSuite = readerEvoSuite.readLine()) != null)
+            System.out.println(lineEvoSuite);
 			
-        reader2 = new BufferedReader(new InputStreamReader(process2.getErrorStream()));
-        while ((line2 = reader2.readLine()) != null)
-            System.out.println(line2);
+        readerEvoSuite = new BufferedReader(new InputStreamReader(processEvoSuite.getErrorStream()));
+        while ((lineEvoSuite = readerEvoSuite.readLine()) != null)
+            System.out.println(lineEvoSuite);
 
         try {
-			int exitCode = process2.waitFor();
+			int exitCode = processEvoSuite.waitFor();
 
 			System.out.println("ERRORE CODE: " + exitCode);
 		} catch (InterruptedException e) {
@@ -220,38 +219,32 @@ public class RobotUtil {
 			e.printStackTrace();
 		}
 
-		File resultsDir2 = new File("/VolumeT8/app/FolderTree/" + cname + "/RobotTest/EvoSuiteTest");
+		File resultDirEvoSuite = new File("/VolumeT8/app/FolderTree/" + cname + "/RobotTest/EvoSuiteTest");
 
-        File results2 [] = resultsDir2.listFiles();
-        for(File result2 : results2) {
-			System.out.println(result2.getAbsolutePath());
-			int score = LineCoverageCSV(result2.getAbsolutePath() + "/TestReport/statistics.csv");
+        File resultsEvoSuite [] = resultDirEvoSuite.listFiles();
+        for(File result : resultsEvoSuite) {
+			System.out.println(result.getAbsolutePath());
+			int score = LineCoverageCSV(result.getAbsolutePath() + "/TestReport/statistics.csv");
 
-			System.out.println(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
-			int livello = Integer.parseInt(result2.toString().substring(result2.toString().length() - 7, result2.toString().length() - 5));
-
+			System.out.println(result.toString().substring(result.toString().length() - 7, result.toString().length() - 5));
+			int livello = Integer.parseInt(result.toString().substring(result.toString().length() - 7, result.toString().length() - 5));
 			System.out.println("La copertura del livello " + String.valueOf(livello) + " e': " + String.valueOf(score));
 
 			HttpClient httpClient = HttpClientBuilder.create().build();
 			HttpPost httpPost = new HttpPost("http://t4-g18-app-1:3000/robots");
-
 			JSONArray arr = new JSONArray();
-
 			JSONObject rob = new JSONObject();
+
 			rob.put("scores", String.valueOf(score));
 			rob.put("type", "evosuite");
 			rob.put("difficulty", String.valueOf(livello));
 			rob.put("testClassId", cname);
-
 			arr.put(rob);
 
 			JSONObject obj = new JSONObject();
 			obj.put("robots", arr);
-
 			StringEntity jsonEntity = new StringEntity(obj.toString(), ContentType.APPLICATION_JSON);
-
 			httpPost.setEntity(jsonEntity);
-
 			HttpResponse response = httpClient.execute(httpPost);
 
 		}

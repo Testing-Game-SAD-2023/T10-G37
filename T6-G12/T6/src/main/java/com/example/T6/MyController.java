@@ -307,7 +307,7 @@ public class MyController {
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
 
-            String xml_string = responseObj.getString("coverage");
+            String xml_string = responseObj.getString("xml");
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_XML);

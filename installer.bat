@@ -33,6 +33,9 @@ REM Esecuzione del file installazione.sh all'interno del container manvsclass-co
 echo "Esecuzione del file installazione.sh all'interno del container manvsclass-controller-1"
 docker exec -it manvsclass-controller-1 /bin/bash -c "./../VolumeT8/app/installazione.sh"
 
+docker start t23-g1-app-1
+docker start t4-g18-app-1
+docker start ui_gateway-proxy-1
 REM Messaggio di completamento dell'installazione
 echo "Installazione terminata"
 pause

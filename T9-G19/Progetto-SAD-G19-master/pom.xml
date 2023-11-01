@@ -36,24 +36,26 @@
             </configuration>
           </plugin>
           <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>single</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <descriptor>assembly.xml</descriptor>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <phase>package</phase>
+                      <goals>
+                          <goal>single</goal>
+                      </goals>
+                  </execution>
+              </executions>
+              <configuration>
+                  <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
                   <archive>
-                    <manifest>
-                      <mainClass>Main</mainClass>
-                    </manifest>
+                      <manifest>
+                          <mainClass>Main</mainClass>
+                      </manifest>
                   </archive>
-            </configuration>
-        </plugin>
+              </configuration>
+          </plugin>
     </plugins>
   </build>
 </project>

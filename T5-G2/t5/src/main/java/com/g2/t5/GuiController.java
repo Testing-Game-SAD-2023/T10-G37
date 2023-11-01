@@ -105,8 +105,6 @@ public class GuiController {
             robotList.put(i,levels);
             System.out.println("robot:" + robotList);
         }
-
-
         model.addAttribute("hashMap", hashMap);
 
         model.addAttribute("hashMap2", robotList);

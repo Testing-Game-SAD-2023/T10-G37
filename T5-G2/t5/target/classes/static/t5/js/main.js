@@ -84,29 +84,11 @@ function redirectToPagereport() {
   console.log(difficulty);
   if (classe && robot && difficulty) {
 
-    // $.ajax({
-    //   url: 'http://localhost:8082/sendVariable', // L'URL del tuo endpoint sul server
-    //   type: 'POST', // Metodo HTTP da utilizzare
-    //   data: {
-    //     myVariable: classe,
-    //     myVariable2: robot
-    //   }, // Dati da inviare al server
-    //   success: function (response) {
-    //     console.log('Dati inviati con successo');
-    //     alert("Dati inviati con successo");
-    //     // Gestisci la risposta del server qui
-    //     window.location.href = "/report";
-    //   },
-    //   error: function (error) {
-    //     console.error('Errore nell invio dei dati');
-    //     alert("Dati non inviati con successo");
-    //     // Gestisci l'errore qui
-    //   }
-    // });
     localStorage.setItem("classe", classe);
     localStorage.setItem("robot", robot);
     localStorage.setItem("difficulty", difficulty);
     window.location.href = "/report";
+
   }
   else {
     alert("Seleziona una classe e un robot");
@@ -118,33 +100,6 @@ function redirectToPagereport() {
 function redirectToPagemain() {
   window.location.href = "/main";
 }
-
-
-
-// function redirectToPagemainlogin() {
-
-//   user = document.getElementById("username").value;
-//   password = document.getElementById("password").value;
-// if(user && password ){
-//   alert("Login effettuato con successo");
-  
-//   $.ajax({
-//     url:'http://localhost:8082/login-variabiles',
-//     type: 'POST',
-//     data: { 
-//       var1: user, 
-//       var2: password
-//     },
-
-//   })
-
-
-//   window.location.href = "/main";
-// }
-// else{
-//   alert("Inserisci username e password");
-// }
-// }
 
 function redirectToPageeditor() {
   $.ajax({

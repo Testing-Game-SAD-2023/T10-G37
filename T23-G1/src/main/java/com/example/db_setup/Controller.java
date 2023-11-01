@@ -316,28 +316,6 @@ public class Controller {
         return ResponseEntity.ok("Password change successful");
     }
 
-    // // ID per il task 5
-    // @GetMapping("/get_ID")
-    // public Integer getID(@RequestParam("email") String email, @RequestParam("password") String password){
-        
-    //     User user = userRepository.findByEmail(email);
-
-    //     if (user == null) {
-    //         return -1;
-    //     }
-
-    //     boolean passwordMatches = myPasswordEncoder.matches(password, user.password);
-    //     if (!passwordMatches) {
-    //         return -1;
-    //     }
-
-    //     Integer ID= user.ID;
-
-    //     return ID;
-    // }
-
-    /* GET PER LE VIEW */
-
     public boolean isJwtValid(String jwt) {
         try {
             Claims c = Jwts.parser().setSigningKey("mySecretKey").parseClaimsJws(jwt).getBody();
