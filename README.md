@@ -4,7 +4,7 @@
  Valerio Di Domenico 	M63001465
  Genny Fedele 		M63001422
 
-#Per una corretta visualizzazione della struttura, effettuare il download del file
+# Per una corretta visualizzazione della struttura, effettuare il download del file
 
 
 ## PASSO 1
