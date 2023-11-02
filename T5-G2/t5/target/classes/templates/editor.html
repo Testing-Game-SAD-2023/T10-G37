@@ -782,7 +782,7 @@
           if(localStorage.getItem("turnId") == null) {
             alert("Hai già sottomesso il tuo tentativo!");
           } else {          
-          // Effettua una richiesta al tuo controller Spring per ottenere il file di output di JaCoCo
+          // Effettua una richiesta al tuo controller Spring per ottenere il file di output di EvoSuite
           var formData = new FormData();
           formData.append("testingClassName", "NomeClasseTest.java");
           formData.append("testingClassCode", editor.getValue());
@@ -795,20 +795,16 @@
             data: formData,
             processData: false,
             contentType: false,
-            dataType: "text", //potrebbe essere anche giusto leggere da un file xml di report di JaCoCo
+            dataType: "text", 
             success: function(reportContent) {
               console.log("Punteggio " + reportContent);
-              // Una volta ricevuto il file di output di JaCoCo, elabora il contenuto
-              //highlightCodeCoverage(reportContent);
+
               var msg="Risultato copertura Test utente : " + reportContent + " %";
               alert(msg);
-
-
-              
             },
             error: function() {
               alert("Si è verificato un errore. Assicurati prima che la compilazione vada a buon fine!");
-              console.log("Errore durante il recupero del file di output di JaCoCo.");
+              console.log("Errore durante il recupero del file di output di Evosuite.");
             }
           });
         }
