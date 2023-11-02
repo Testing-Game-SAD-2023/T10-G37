@@ -1,8 +1,11 @@
 # GUIDA DEFINITIVA ALL'INSTALLAZIONE E ALL'ESECUZIONE
 # Gruppo T10-G37:
-# Alberto Aimone 	M63001508
-# Valerio Di Domenico 	M63001465
-# Genny Fedele 		M63001422
+ Alberto Aimone 	M63001508
+ Valerio Di Domenico 	M63001465
+ Genny Fedele 		M63001422
+
+#Per una corretta visualizzazione della struttura, effettuare il download del file
+
 
 ## PASSO 1
 Installazione Docker Desktop: se già installato correttamente sulla macchina passare al Passo 2
