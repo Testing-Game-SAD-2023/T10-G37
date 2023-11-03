@@ -681,27 +681,20 @@
                 console.log(response);
                 console.log(" contenuto xml " + response.xml);
                 highlightCodeCoverage($.parseXML(response.xml));
-
-                consoleArea.setValue(response.outCompile);
-                
-               //add highlightCodeCoverage($.parseXML(response.coverage));
+                consoleArea.setValue(response.outCompile);                
                 consoleArea2.setValue(`Esito Risultati (percentuale di linee coperte)
-  Il tuo punteggio: ${response.score.toString()}% LOC
-  Il punteggio del robot: ${response.robotScore.toString()}% LOC
-  Le restanti statistiche sono :
-  Branch:            ${response.statistic[2]} % LOC
-  WeakMutation:      ${response.statistic[3]} % LOC
-  Exception:         ${response.statistic[4]} % LOC
-  Method:            ${response.statistic[5]} % LOC
-  Output:            ${response.statistic[6]} % LOC
-  CBranch:           ${response.statistic[7]} % LOC
-  MethodNoException: ${response.statistic[8]} % LOC`
+                Il tuo punteggio: ${response.score.toString()}% LOC
+                Il punteggio del robot: ${response.robotScore.toString()}% LOC
+                Le restanti statistiche sono :
+                Branch:            ${response.statistic[2]} % LOC
+                WeakMutation:      ${response.statistic[3]} % LOC
+                Exception:         ${response.statistic[4]} % LOC
+                Method:            ${response.statistic[5]} % LOC
+                Output:            ${response.statistic[6]} % LOC
+                CBranch:           ${response.statistic[7]} % LOC
+                MethodNoException: ${response.statistic[8]} % LOC`
   
-  );
-
-
-
-                
+              );                
                 alert(response.win == true ? "Hai vinto!" : "Hai perso!");
                 localStorage.clear();
               },
@@ -724,57 +717,8 @@
       }
 
       var fileName;
-      /* 
-      var saveButton = document.getElementById("saveButton");
-      saveButton.addEventListener("click", function() {
-        $(document).ready(function() {
-          var idUtente = "VALORE_ID_UTENTE";
-          var idPartita = "VALORE_ID_PARTITA";
-          var idTurno = "VALORE_ID_TURNO";
-          var nameCUT= "CLASS_UNDER_TEST";
-          var robotScelto = "VALORE_ROBOT_SCELTO";
-          var difficolta = "VALORE_DIFFICOLTA";
-          var playerTestClass=getJavaClassContent();
-          // Chiedi all'utente di inserire il nome del file
-          if (!fileName) {
-            // Primo click: chiedi all'utente di inserire il nome del file
-            fileName = prompt("Inserisci il nome del file");
-            if (fileName) {
-            // Aggiungi l'estensione .java se non è già presente
-              if (!fileName.endsWith(".java")) {
-              fileName += ".java";
-              }
-            }
-          }
-          // Crea un oggetto FormData per inviare i dati come parte di una richiesta multipart/form-data
-          var formData = new FormData();
-          formData.append("idUtente", idUtente);
-          formData.append("idPartita", idPartita);
-          formData.append("idTurno", idTurno);
-          formData.append("nameCUT", nameCUT);
-          formData.append("robotScelto", robotScelto);
-          formData.append("difficolta", difficolta);
-          formData.append("file",new Blob([playerTestClass],{type:"text/plain"}),fileName);
-          // Effettua la richiesta AJAX per inviare i dati e il file XML
-          $.ajax({
-            url: "http://localhost:80/inviaDatiEFile",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-              // Gestisci la risposta dal servizio destinazione
-              console.log(response);
-            },
-            error: function() {
-              // Gestisci l'errore
-              console.log("Errore durante l'invio dei dati e del file XML.");
-            }
-          });
-        });
-      });
-      */
-      //risultati JACOCO da T7
+
+      //risultati Evosuite da T7
       var coverageButton = document.getElementById("coverageButton");
         coverageButton.addEventListener("click", processReport);
         
@@ -798,7 +742,6 @@
             dataType: "text", 
             success: function(reportContent) {
               console.log("Punteggio " + reportContent);
-
               var msg="Risultato copertura Test utente : " + reportContent + " %";
               alert(msg);
             },
@@ -1112,30 +1055,6 @@
       titleElement.classList.add("modal2-title");
       titleElement.textContent = "GAME INFO";
       modal2Content.insertBefore(titleElement, modal2Content.firstChild);
-      // Aggiungi i campi
-      /* var idUtenteElement = document.createElement("p");
-      var usernamej = parseJwt(getCookie("jwt")).userId;
-      idUtenteElement.textContent = "UserID: "+usernamej;
-      modal2Content.appendChild(idUtenteElement);
-
-      var idPartitaElement = document.createElement("p");
-      var gameIDj = localStorage.getItem("gameId");
-      idPartitaElement.textContent = "GameID: "+gameIDj;
-      modal2Content.appendChild(idPartitaElement);
-
-      var idTurnoElement = document.createElement("p");
-      var turnoIDj = localStorage.getItem("roundId");
-      idTurnoElement.textContent = "Turno: " + turnoIDj;
-      modal2Content.appendChild(idTurnoElement);
-
-      var robotSceltoElement = document.createElement("p");
-      var robotj= localStorage.getItem("robot");
-      robotSceltoElement.textContent = "Robot:" +robotj;
-      modal2Content.appendChild(robotSceltoElement);
-
-      // var difficoltaElement = document.createElement("p");
-      // difficoltaElement.textContent = "Livello: 1";
-      // modal2Content.appendChild(difficoltaElement);*/
     </script>
 
     <script th:inline="javascript">

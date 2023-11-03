@@ -153,19 +153,15 @@ public class MyController {
             }
 
             HttpEntity entity = response.getEntity();
-
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
-
             String statistic = responseObj.getString("coverage");
             String [] coverage=statistic.split(" ");
             System.out.println("Score Utente : "+ coverage[1]);
             String outCompile = responseObj.getString("outCompile");
             String xml_string = responseObj.getString("xml");
-
-
             // PRESA DELLO SCORE UTENTE
-           Integer userScore= Integer.parseInt(coverage[1]);
+            Integer userScore= Integer.parseInt(coverage[1]);
 
             // RISULTATI ROBOT VERSO TASK4
             URIBuilder builder = new URIBuilder("http://t4-g18-app-1:3000/robots");
@@ -334,9 +330,7 @@ public class MyController {
             obj.put("underTestClassCode", request.getParameter("underTestClassCode"));
 
             StringEntity jsonEntity = new StringEntity(obj.toString(), ContentType.APPLICATION_JSON);
-
             httpPost.setEntity(jsonEntity);
-
             HttpResponse response = httpClient.execute(httpPost);
 
             if (response.getStatusLine().getStatusCode() > 299) {
@@ -351,11 +345,9 @@ public class MyController {
             String statistic = responseObj.getString("coverage");
             String [] coverage = statistic.split(" ");
             System.out.println("Score Utente : "+ coverage[1]);
-
-
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.TEXT_PLAIN);
 
+            headers.setContentType(MediaType.TEXT_PLAIN);
             return new ResponseEntity<>(coverage[1], headers, HttpStatus.OK);
         } catch (IOException e) {
             System.err.println(e);

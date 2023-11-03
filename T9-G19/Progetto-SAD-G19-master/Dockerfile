@@ -11,5 +11,3 @@ COPY . /app
 WORKDIR /app
 
 ENTRYPOINT [ "bash", "./docker-entrypoint.sh" ]
-# ENTRYPOINT [ "/usr/lib/jvm/java-1.8-openjdk/bin/java", "-jar", "Task9-G19-0.0.1-SNAPSHOT.jar" ]
-# ENTRYPOINT [ "bash", "robot.sh", "Lola", "5", "12312", "-1" ]

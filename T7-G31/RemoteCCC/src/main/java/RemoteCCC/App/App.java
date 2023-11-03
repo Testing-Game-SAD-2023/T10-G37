@@ -36,7 +36,6 @@ public class App {
     public static void main(String[] args) {
 		SpringApplication.run(App.class, args);
 	}
-
     	public static String LineCoverageCSV(String path) {
 		try {
 			// Creare un oggetto CSVReader
@@ -49,19 +48,16 @@ public class App {
                     int coverage= (int) coverageDouble;
                     statistic= statistic + " " + String.valueOf(coverage);
 			}
-	
 			// Chiudere il reader
 			reader.close();
             System.out.println("Output CSV : " + statistic);
             return  statistic;
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
 		// Restituire un valore predefinito se il valore non è stato trovato
 		return "Errore csvCoverage"; 
-	}
+	    }
     
 
 
@@ -100,8 +96,8 @@ public class App {
             Path path = Paths.get(Config.getCoverageFolder());
             //Estraggo il valore della copertura per linee tramite la funzione LineCoverageCSV
             String coverage=LineCoverageCSV(Config.getCoverageFolder());
-            String retXmlJacoco = readFileToString(Config.getxmlFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
-
+            //Estraggo il file xml prodotto da jacoco
+            String retXmlJacoco = readFileToString(Config.getxmlFolder());
             try {
                 Files.delete(path);
                 System.out.println("Il file è stato eliminato con successo.");
@@ -147,7 +143,7 @@ public class App {
 
         ResponseDTO response = new ResponseDTO();        
         if(compileExecuteCovarageWithMaven(output_maven,request)){
-            String retXmlJacoco = readFileToString(Config.getxmlFolder());//zipSiteFolderToJSON(Config.getzipSiteFolderJSON()).toString();
+            String retXmlJacoco = readFileToString(Config.getxmlFolder());
             response.setError(false);
             response.setoutCompile(output_maven[0]);
             response.setCoverage(null);
