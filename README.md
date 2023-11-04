@@ -4,9 +4,6 @@
  Valerio Di Domenico 	M63001465
  Genny Fedele 		M63001422
 
-# Per una corretta visualizzazione, effettuare il download del file
-
-
 ## PASSO 1
 Installazione Docker Desktop: se già installato correttamente sulla macchina passare al Passo 2
 NOTA: sebbene il Windows Subsystem for Linux wsl2, una funzionalità che consente di eseguire un ambiente Linux all'interno del sistema operativo Windows garantendo la compatibilità tra Docker Desktop e Windows, normalmente venga installato e aggiornato durante l'installazione di Docker Desktop, vi sono casi in cui questo step non venga effettuato correttamente in maniera automatica (all'apertura di Docker è presente un messaggio di errore "WSL Error"), bisogna quindi installare manualmente wsl tramite gli step preliminari 0:
@@ -95,9 +92,9 @@ NOTA: sono presenti alcuni file già pronti nella cartella ClassiUT\Tests (ad es
 
 NOTA: a seconda della macchina che si utilizza e della complessità della classe under test e della classe test caricata potrebbe essere necessario qualche secondo o minuto per permettere di completare l'esecuzione, munirsi di pazienza. È comunque possibile monitorare l'avanzamento tramite Docker: per fare ciò è necessario recarsi nella sezione Containers, espandere il container del Task 7 "remoteccc" e cliccare su "app-1", qui è possibile visualizzare il log del container che riporterà l'output di avanzamento dell'esecuzione. Allo stesso modo è possibile visualizzare i log dei container legati a questa funzionalità (T5, T6)
 
-##FINE##
+## FINE
 
-NOTE FINALI:
+### NOTE FINALI:
 Si è notato che sulla macchine sulle quali viene installato l'applicazione, con sistema operativo Windows 10 e Windows 11, all'avvio di Docker, si abbia bisogno di una buona quantità di RAM a disposizione, si è notato che una quantità di RAM inferiore a 8GB potrebbe dare problemi saltuari; possono capitare casi nel quale sul browser all'indirizzo http://localhost non sia presente alcuna pagina, in questi casi è necessario agire nei seguenti modi:
 1) aprire la finestra di Docker.
 2) se è presente la scritta "Docker Engine Stopped" cliccare con il tasto destro l'icona di Docker (su Windows in basso a destra nell'area di notifica delle icone sulla barra delle applicazioni) e cliccare "Restart". Se anche ciò non funziona terminare l'applicazione manualmente e riavviare Docker.
@@ -108,7 +105,7 @@ Per consigli su metologie e software di sviluppo, su come effettuare le modifich
 
 ## STRUTTURE CARTELLE E FILE DI RILIEVO:
 NOTA: sono stati evidenziati solo gli elementi di particolare interesse
-
+<pre>
 \---VolumeT8\app\FolderTree
     \---NomeClasse			//Nome della cartella associata alla classe aggiunta
     	+---NomeClasseSourceCode
@@ -172,3 +169,4 @@ NOTA: sono stati evidenziati solo gli elementi di particolare interesse
      \---site
 	 \---jacoco
 	     \---jacoco.xml
+</pre>
