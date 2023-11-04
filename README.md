@@ -7,12 +7,12 @@
 ## PASSO 1
 Installazione Docker Desktop: se già installato correttamente sulla macchina passare al Passo 2
 NOTA: sebbene il Windows Subsystem for Linux wsl2, una funzionalità che consente di eseguire un ambiente Linux all'interno del sistema operativo Windows garantendo la compatibilità tra Docker Desktop e Windows, normalmente venga installato e aggiornato durante l'installazione di Docker Desktop, vi sono casi in cui questo step non venga effettuato correttamente in maniera automatica (all'apertura di Docker è presente un messaggio di errore "WSL Error"), bisogna quindi installare manualmente wsl tramite gli step preliminari 0:
-
+<pre>
 0a) avviare il prompt dei comandi
 0b) digitare wsl --install e premere invio
 0c) digitare wsl --update e premere invio
 0d) riavviare la macchina
-
+</pre>
 1) recarsi alla pagina web ufficiale: https://www.docker.com/products/docker-desktop/
 2) cliccare su Download per il proprio sistema operativo (ad es. Download for Windows) per scaricare il setup eseguibile
 3) lanciare l'eseguibile e procedere all'installazione, è possibile completare l'installazione con le impostazione di default, anche senza effettuare la registrazione di un account e senza effettuare il login
@@ -24,10 +24,10 @@ Installazione dell'applicazione su Docker:
 
 1) avviare Docker Desktop
 2) avviare lo script "installer.bat" eseguendo il file con doppio click (consentendo esclusioni al firewall se richieste). Saranno effettuate automaticamente le seguenti operazioni:
-a) creazione della rete "global-network" comune a tutti i container.
+<pre>a) creazione della rete "global-network" comune a tutti i container.
 b) creazione del volume "VolumeT9" comune ai Task 1 e 9; creazione del volume "VolumeT8" comune ai Task 1 e 8
 c) installazione di ogni singolo container.
-
+</pre>
 NOTA: il container relativo al Task 9 ("Progetto-SAD-G19-master") si sospenderà autonomamente dopo l'avvio. Esso viene utilizzato solo per "popolare" il volume "VolumeT9" condiviso con il Task 1. Lo stesso vale per il container relativo al Task 8 ("Prototipo2.0"), usato per il volume "VolumeT8".
 
 ## PASSO 3
