@@ -130,7 +130,7 @@ NOTA: sono stati evidenziati solo gli elementi di particolare interesse
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-\---VolumeT9\app\FolderTree		//All'interno della cartella FolderTree è anche presente il file FolderTree.txt riassuntivo di quanto scritto qui
+\---VolumeT9\app\FolderTree		 riassuntivo di quanto scritto qui
     \---NomeClasse			//Nome della cartella associata alla classe aggiunta
     	+---NomeClasseSourceCode
     	|   \---NomeClasse.java
