@@ -88,9 +88,6 @@ public class App {
 
         ResponseDTO response = new ResponseDTO();
 
-        
-
-        
         if(compileExecuteCovarageWithMaven(output_maven,request)){
             //Salvo il path in cui verrà inserito il file csv
             Path path = Paths.get(Config.getCoverageFolder());
@@ -120,7 +117,10 @@ public class App {
         }
         deleteFile(underTestClassName, testingClassName);
         return response;
-    }
+    }  
+
+
+
 
 
     @PostMapping(value = "/highlightline", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -192,11 +192,13 @@ private static boolean compileExecuteCovarageWithMaven(String []ret, RequestDTO 
         processBuilder.redirectErrorStream(true);        
         Process process = processBuilder.start();        
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
         String line;
         while ((line = reader.readLine()) != null) {
             ret[0] += line += "\n";
             // Stampa l'output in modo da poter vedere l'errore
             System.err.println(line);
+
         }
         
         int exitCode = process.waitFor();

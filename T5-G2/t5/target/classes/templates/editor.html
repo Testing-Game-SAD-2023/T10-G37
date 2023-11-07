@@ -644,7 +644,8 @@
           },
           error: function(xhr, status, error) {
             // Logica da eseguire in caso di errore
-            alert("Si è verificato un errore!");
+            alert("Si è verificato un errore!");         
+          
             console.log("Errore durante l'invio della richiesta:", error);
           }
         });
@@ -653,10 +654,13 @@
       //esecuzione ricevendo XML da T7 e mandando partita a T4
       var runButton = document.getElementById("runButton");
       runButton.addEventListener("click", function() {
+
         $(document).ready(function() {
           if(localStorage.getItem("turnId") == null) {
             alert("Hai già sottomesso il tuo tentativo!");
           } else {
+            // Svuota la console
+            consoleArea.setValue('');
             var formData = new FormData();
             
             formData.append("testingClassName", "NomeClasseTest.java");
@@ -686,13 +690,13 @@
                 Il tuo punteggio: ${response.score.toString()}% LOC
                 Il punteggio del robot: ${response.robotScore.toString()}% LOC
                 Le restanti statistiche sono :
-                Branch:            ${response.statistic[2]} % LOC
-                WeakMutation:      ${response.statistic[3]} % LOC
-                Exception:         ${response.statistic[4]} % LOC
-                Method:            ${response.statistic[5]} % LOC
-                Output:            ${response.statistic[6]} % LOC
-                CBranch:           ${response.statistic[7]} % LOC
-                MethodNoException: ${response.statistic[8]} % LOC`
+                Branch:            ${response.statistic[2]} % 
+                WeakMutation:      ${response.statistic[3]} % 
+                Exception:         ${response.statistic[4]} % 
+                Method:            ${response.statistic[5]} % 
+                Output:            ${response.statistic[6]} % 
+                CBranch:           ${response.statistic[7]} % 
+                MethodNoException: ${response.statistic[8]} % `
   
               );                
                 alert(response.win == true ? "Hai vinto!" : "Hai perso!");
@@ -701,6 +705,7 @@
               error: function() {
                 // Gestisci l'errore, ad esempio mostra un messaggio di errore
                 console.log("Errore durante l'invio della partita.");
+                alert("Errore durante l'invio della partita");
               }
             }); 
           }
@@ -723,6 +728,8 @@
         coverageButton.addEventListener("click", processReport);
         
         function processReport() {
+        // Svuota la console
+        consoleArea.setValue('');
           if(localStorage.getItem("turnId") == null) {
             alert("Hai già sottomesso il tuo tentativo!");
           } else {          
@@ -739,10 +746,12 @@
             data: formData,
             processData: false,
             contentType: false,
-            dataType: "text", 
+            dataType: "json", 
             success: function(reportContent) {
-              console.log("Punteggio " + reportContent);
-              var msg="Risultato copertura Test utente : " + reportContent + " %";
+              console.log("Punteggio " + reportContent.score);
+
+              var msg="Risultato copertura Test utente : " + reportContent.score + " %";
+              consoleArea.setValue(reportContent.outCompile);                
               alert(msg);
             },
             error: function() {
@@ -756,6 +765,8 @@
         var jacocoButton = document.getElementById("jacocoButton");
         jacocoButton.addEventListener("click", processJaCoCoReport);
         function processJaCoCoReport() {
+          // Svuota la console
+          consoleArea.setValue('');
           if(localStorage.getItem("turnId") == null) {
             alert("Hai già sottomesso il tuo tentativo!");
           } else {
@@ -772,11 +783,12 @@
             data: formData,
             processData: false,
             contentType: false,
-            dataType: "xml", //potrebbe essere anche giusto leggere da un file xml di report di JaCoCo
+            dataType: "json", //potrebbe essere anche giusto leggere da un file xml di report di JaCoCo
             success: function(reportContent) {
               console.log(reportContent);
               // Una volta ricevuto il file di output di JaCoCo, elabora il contenuto
-              highlightCodeCoverage(reportContent);
+              highlightCodeCoverage($.parseXML(reportContent.xml));
+              consoleArea.setValue(reportContent.outCompile);                
             },
             error: function() {
               alert("Si è verificato un errore. Assicurati prima che la compilazione vada a buon fine!");
@@ -796,6 +808,8 @@
           var partiallyCoveredLines = [];
 
           reportContent.querySelectorAll("line").forEach(function(line) {
+            // Svuota la console
+            consoleArea.setValue('');
             if(line.getAttribute("mi") == 0) coveredLines.push(line.getAttribute("nr"));
             else if(line.getAttribute("cb") / (line.getAttribute("mb") + line.getAttribute("cb")) == (2/4)) partiallyCoveredLines.push(line.getAttribute("nr"));
             else uncoveredLines.push(line.getAttribute("nr"));

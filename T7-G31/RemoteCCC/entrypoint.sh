@@ -9,6 +9,6 @@ java -version
 javac -version
 wget https://github.com/EvoSuite/evosuite/releases/download/v1.0.6/evosuite-1.0.6.jar
 wget https://github.com/EvoSuite/evosuite/releases/download/v1.0.6/evosuite-standalone-runtime-1.0.6.jar
-java -jar evosuite-1.0.6.jar
+/usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java -jar evosuite-1.0.6.jar
 cp evosuite-1.0.6.jar /ClientProject
 cp evosuite-standalone-runtime-1.0.6.jar /ClientProject

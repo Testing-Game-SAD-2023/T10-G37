@@ -107,8 +107,8 @@ public class MyController {
 
             String responseBody = EntityUtils.toString(entity);
             JSONObject responseObj = new JSONObject(responseBody);
-
             String out_string = responseObj.getString("outCompile");
+            System.out.println("contenuto out compile mycontroller "+out_string);
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_PLAIN);
@@ -116,6 +116,7 @@ public class MyController {
 
             return new ResponseEntity<>(out_string, headers, HttpStatus.OK);
         } catch (IOException e) {
+            System.out.println("Errore catturato send info");
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -304,13 +305,22 @@ public class MyController {
             JSONObject responseObj = new JSONObject(responseBody);
 
             String xml_string = responseObj.getString("xml");
+            String outCompile = responseObj.getString("outCompile");
+            JSONObject result = new JSONObject();
+            result.put("outCompile", outCompile);
+            result.put("xml",xml_string);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.TEXT_XML);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+
+           // headers.setContentType(MediaType.TEXT_XML);
             // headers.setContentDisposition(ContentDisposition.attachment().filename("index.html").build());
 
-            return new ResponseEntity<>(xml_string, headers, HttpStatus.OK);
+            //return new ResponseEntity<>(xml_string, headers, HttpStatus.OK);
+            return new ResponseEntity<>(result.toString(), headers, HttpStatus.OK);
+
         } catch (IOException e) {
+
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -345,10 +355,15 @@ public class MyController {
             String statistic = responseObj.getString("coverage");
             String [] coverage = statistic.split(" ");
             System.out.println("Score Utente : "+ coverage[1]);
+            String outCompile = responseObj.getString("outCompile");
+            JSONObject result = new JSONObject();
+            result.put("outCompile", outCompile);
+            result.put("score",coverage[1]);
+
             HttpHeaders headers = new HttpHeaders();
 
-            headers.setContentType(MediaType.TEXT_PLAIN);
-            return new ResponseEntity<>(coverage[1], headers, HttpStatus.OK);
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity<>(result.toString(), headers, HttpStatus.OK);
         } catch (IOException e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
