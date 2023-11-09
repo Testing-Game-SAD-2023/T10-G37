@@ -5,10 +5,10 @@
  Genny Fedele 		M63001422
 
 ## PASSO 1
-NOTA: Questa procedura è specifica per sistemi Windows, per sistemi MacOs e Linux, si rimanda alla documentazione ufficiale per l'installazione di docker desktop( si allegano i link 
-MAC: https://docs.docker.com/desktop/install/mac-install/ 
-Linux: https://docs.docker.com/desktop/install/linux-install/ )
-Installazione Docker Desktop: se già installato correttamente sulla macchina passare al Passo 2
+NOTA: Questa procedura è specifica per sistemi Windows, per sistemi MacOs e Linux, si rimanda alla documentazione ufficiale per l'installazione di docker desktop( si allegano i link  
+MAC: https://docs.docker.com/desktop/install/mac-install/   
+Linux: https://docs.docker.com/desktop/install/linux-install/ )  
+Installazione Docker Desktop: se già installato correttamente sulla macchina passare al Passo 2   
 NOTA: sebbene il Windows Subsystem for Linux wsl2, una funzionalità che consente di eseguire un ambiente Linux all'interno del sistema operativo Windows garantendo la compatibilità tra Docker Desktop e Windows, normalmente venga installato e aggiornato durante l'installazione di Docker Desktop, vi sono casi in cui questo step non venga effettuato correttamente in maniera automatica (all'apertura di Docker è presente un messaggio di errore "WSL Error"), bisogna quindi installare manualmente wsl tramite gli step preliminari 0:
 <pre>
 0a) avviare il prompt dei comandi
@@ -26,10 +26,9 @@ NOTA: sebbene il Windows Subsystem for Linux wsl2, una funzionalità che consent
 Installazione dell'applicazione su Docker:
 
 1) avviare Docker Desktop
-<pre>
-2a) avviare lo script "installer.bat" eseguendo il file con doppio click (consentendo esclusioni al firewall se richieste). Saranno effettuate automaticamente le seguenti operazioni:
-2b) Se si utilizza un dispositivo con una distrubuzione Linux o MacOs, avvviare lo script "installazione_mac_linux.sh" anzichè "installer.bat". Dopodichè seguire il resto dei passi.
-</pre>
+2) A. avviare lo script "installer.bat" eseguendo il file con doppio click (consentendo esclusioni al firewall se richieste). Saranno effettuate automaticamente le seguenti operazioni:  
+   B. Se si utilizza un dispositivo con una distrubuzione Linux o MacOs, avvviare lo script "installazione_mac_linux.sh" anzichè "installer.bat". Dopodichè seguire il resto dei passi.  
+
 <pre>
 a) creazione della rete "global-network" comune a tutti i container.
 b) creazione del volume "VolumeT9" comune ai Task 1 e 9; creazione del volume "VolumeT8" comune ai Task 1 e 8
